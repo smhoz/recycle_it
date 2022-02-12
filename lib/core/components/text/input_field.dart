@@ -13,6 +13,8 @@ class InputField extends StatelessWidget {
   final EdgeInsets? padding;
   final Function(String)? validator;
   final int? maxLength;
+  TextEditingController? controller;
+  final Function(String)? onChanged;
 
   InputField({
     Key? key,
@@ -22,18 +24,19 @@ class InputField extends StatelessWidget {
     this.textInputType = TextInputType.text,
     this.prefix = "",
     this.helperText,
+    this.onChanged,
     this.borderRadius = 64,
     this.padding = const EdgeInsets.symmetric(vertical: 8, horizontal: 32),
     this.validator,
     this.maxLength,
-    required this.controller,
+    this.controller,
   }) : super(key: key);
 
-  final TextEditingController controller;
   final formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
+    controller ??= TextEditingController();
     var border = OutlineInputBorder(
       borderRadius: BorderRadius.all(
         Radius.circular(borderRadius!),
@@ -46,6 +49,7 @@ class InputField extends StatelessWidget {
         children: [
           Container(
             height: 60,
+            width: context.width,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(borderRadius!),
               boxShadow: [
@@ -61,6 +65,7 @@ class InputField extends StatelessWidget {
             key: formKey,
             child: Center(
               child: TextFormField(
+                onChanged: onChanged,
                 maxLength: maxLength,
                 textAlign: TextAlign.center,
                 controller: controller,
