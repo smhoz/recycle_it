@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hackathon_app/core/consts/navigation_const.dart';
 import 'package:hackathon_app/core/extensions/context_extension.dart';
@@ -9,6 +10,7 @@ import 'package:hackathon_app/core/repository/global_repositor.dart';
 import 'package:hackathon_app/view/pages/home_page/components/profile_component/profile_form/profile_form.dart';
 
 import '../../../../../core/utils/locator_get_it.dart';
+import 'bloc/profile_bloc.dart';
 
 class ProfileBody extends StatelessWidget {
   const ProfileBody({Key? key}) : super(key: key);
@@ -20,7 +22,12 @@ class ProfileBody extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           const _CircleAvatar(),
-          ProfileForm(),
+          BlocBuilder<ProfileBloc, ProfileState>(
+            buildWhen: (previous, current) => previous != current,
+            builder: (context, state) {
+              return ProfileForm();
+            },
+          ),
           const _CardContainer(),
           const _LogOutButton()
         ],

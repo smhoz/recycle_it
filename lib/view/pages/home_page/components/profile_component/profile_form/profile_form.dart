@@ -15,42 +15,44 @@ class ProfileForm extends StatelessWidget {
       child: WC.paddingAll(
         child: Form(
           key: _cubit.formKey,
-          child: Column(
-            children: [
-              CustomTextFormField(
-                labelText: "Name",
-                onChanged: _cubit.onFieldChanged,
-                controller: _cubit.nameController,
-              ),
-              _tpDivider,
-              CustomTextFormField(
-                labelText: "Surname",
-                onChanged: _cubit.onFieldChanged,
-                controller: _cubit.surnameController,
-              ),
-              _tpDivider,
-              CustomTextFormField(
-                labelText: "Mail",
-                onChanged: _cubit.onFieldChanged,
-                controller: _cubit.mailController,
-              ),
-              _tpDivider,
-              BlocBuilder(
-                bloc: _cubit,
-                builder: (context, state) {
-                  if (state is ProfileformLoading) {
-                    return const Center(child: CircularProgressIndicator());
-                  } else {
-                    return ElevatedButton.icon(
-                        onPressed: state is ProfileformButtonActive
-                            ? () => _cubit.update()
-                            : null,
-                        icon: const Icon(Icons.send),
-                        label: const Text('Submit'));
-                  }
-                },
-              )
-            ],
+          child: SizedBox(
+            child: Column(
+              children: [
+                CustomTextFormField(
+                  labelText: "Name",
+                  onChanged: _cubit.onFieldChanged,
+                  controller: _cubit.nameController,
+                ),
+                _tpDivider,
+                CustomTextFormField(
+                  labelText: "Surname",
+                  onChanged: _cubit.onFieldChanged,
+                  controller: _cubit.surnameController,
+                ),
+                _tpDivider,
+                CustomTextFormField(
+                  labelText: "Mail",
+                  onChanged: _cubit.onFieldChanged,
+                  controller: _cubit.mailController,
+                ),
+                _tpDivider,
+                BlocBuilder(
+                  bloc: _cubit,
+                  builder: (context, state) {
+                    if (state is ProfileformLoading) {
+                      return const Center(child: CircularProgressIndicator());
+                    } else {
+                      return ElevatedButton.icon(
+                          onPressed: state is ProfileformButtonActive
+                              ? () => _cubit.update()
+                              : null,
+                          icon: const Icon(Icons.send),
+                          label: const Text('Submit'));
+                    }
+                  },
+                )
+              ],
+            ),
           ),
         ),
       ),

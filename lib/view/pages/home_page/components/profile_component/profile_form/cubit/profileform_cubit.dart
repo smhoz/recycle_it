@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:hackathon_app/view/pages/home_page/components/profile_component/bloc/profile_bloc.dart';
 
 import '../../../../../../../core/model/user_model.dart';
 import '../../../../../../../core/repository/auth_repository.dart';
@@ -11,14 +12,14 @@ part 'profileform_state.dart';
 
 class ProfileformCubit extends Cubit<ProfileformState> {
   ProfileformCubit() : super(ProfileformInitial());
-  static final User _user = getIt<GlobalRepository>().user!;
+  final User _user = getIt<GlobalRepository>().user!;
   final _authRepo = getIt<AuthRepository>();
-  final TextEditingController nameController =
-      TextEditingController(text: _user.name);
-  final TextEditingController surnameController =
-      TextEditingController(text: _user.surname);
 
-  final TextEditingController mailController =
+  late TextEditingController nameController =
+      TextEditingController(text: _user.name);
+  late TextEditingController surnameController =
+      TextEditingController(text: _user.surname);
+  late TextEditingController mailController =
       TextEditingController(text: _user.mail);
   final formKey = GlobalKey<FormState>();
 
@@ -58,8 +59,8 @@ class ProfileformCubit extends Cubit<ProfileformState> {
     }
   }
 
-  _getUpdatedUser() {
-    //Kullanıcı güncellendiğinde yeni bilgileri çekmek için kullanılacak method.
+  Future<void> _getUpdatedUser() async {
+    getIt<ProfileBloc>().add(GetProfileUpdatedValues());
   }
 
   @override
