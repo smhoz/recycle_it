@@ -12,9 +12,8 @@ class DBService {
   }
 
   Future<bool> postUserData({required Map data, required String id}) async {
-    Map _result = {id: data};
     try {
-      Response _response = await _dio.put("/users.json", data: _result);
+      Response _response = await _dio.post("/users.json", data: data);
       if (_response.statusCode == 200) {
         return true;
       } else {
@@ -27,7 +26,10 @@ class DBService {
 
   Future<dynamic> getUserData({required String spesificId}) async {
     try {
-      Response _response = await _dio.get("/users/$spesificId.json");
+      final _query =
+          'https://hackathon-app-2022-default-rtdb.europe-west1.firebasedatabase.app/users.json?orderBy="uid"&equalTo="$spesificId"';
+      Dio _newDio = Dio();
+      Response _response = await _newDio.get(_query);
       if (_response.statusCode == 200) {
         return _response.data;
       } else {
