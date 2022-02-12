@@ -13,7 +13,7 @@
 import 'package:auto_route/auto_route.dart' as _i6;
 import 'package:flutter/material.dart' as _i7;
 
-import '../../view/pages/home_page/home_page.dart' as _i3;
+import '../../view/pages/home_page/view/home_page.dart' as _i3;
 import '../../view/pages/login_page/login_page.dart' as _i2;
 import '../../view/pages/register_page/register_page.dart' as _i4;
 import '../../view/pages/splash_page/splash_body.dart' as _i5;

@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:hackathon_app/view/pages/splash_page/splash_body.dart';
 
-import '../../view/pages/home_page/home_page.dart';
+import '../../view/pages/home_page/view/home_page.dart';
 import '../../view/pages/login_page/login_page.dart';
 import '../../view/pages/register_page/register_page.dart';
 import '../../view/pages/splash_page/splash_page.dart';

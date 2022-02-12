@@ -31,7 +31,11 @@ class DBService {
       Dio _newDio = Dio();
       Response _response = await _newDio.get(_query);
       if (_response.statusCode == 200) {
-        return _response.data;
+        Map _result = _response.data;
+        late dynamic lastData;
+        _result.forEach((key, value) => lastData = value);
+
+        return lastData;
       } else {
         return null;
       }
