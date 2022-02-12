@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:hackathon_app/core/model/container_model.dart';
 
 class MapComponent extends StatelessWidget {
   const MapComponent({Key? key}) : super(key: key);
@@ -16,14 +17,21 @@ class MapComponent extends StatelessWidget {
           'Map Component',
           style: Theme.of(context).textTheme.headline3,
         ),
-        const MapWidget(),
+        MapWidget(containers: [
+          RecycleContainer(
+            name: "Container 1",
+            location: const LatLng(41.0055005, 28.7319907),
+            recyclables: [],
+          )
+        ]),
       ]),
     );
   }
 }
 
 class MapWidget extends StatefulWidget {
-  const MapWidget({Key? key}) : super(key: key);
+  final List<RecycleContainer>? containers;
+  const MapWidget({Key? key, this.containers}) : super(key: key);
 
   @override
   _MapWidgetState createState() => _MapWidgetState();
@@ -38,10 +46,6 @@ class _MapWidgetState extends State<MapWidget> {
   @override
   Widget build(BuildContext context) {
     //TODO: Implement list of all locations
-    const List<LatLng> containers = [
-      LatLng(41.0055005, 28.7319907),
-      LatLng(41.0042522, 28.8590636),
-    ];
     return Padding(
       padding: const EdgeInsets.all(4.0),
       child: Material(
@@ -57,11 +61,12 @@ class _MapWidgetState extends State<MapWidget> {
             borderRadius: BorderRadius.circular(20),
             child: GoogleMap(
               markers: List.generate(
-                containers.length,
+                widget.containers!.length,
                 (index) => Marker(
-                  markerId: MarkerId("Container #$index"),
-                  position: containers[index],
-                  infoWindow: InfoWindow(title: "Container #$index"),
+                  markerId: MarkerId(widget.containers![index].name!),
+                  position: widget.containers![index].location!,
+                  infoWindow:
+                      InfoWindow(title: widget.containers![index].name!),
                   onTap: () {
                     //TODO: Show Container Info Bottom Sheet
                   },
@@ -70,7 +75,7 @@ class _MapWidgetState extends State<MapWidget> {
               onMapCreated: _onMapCreated,
               initialCameraPosition: //TODO: Implement focus to the nearest container
                   CameraPosition(
-                target: containers[0],
+                target: widget.containers![0].location!,
                 zoom: 15.0,
               ),
             ),
