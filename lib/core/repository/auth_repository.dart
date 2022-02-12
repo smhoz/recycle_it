@@ -42,7 +42,7 @@ class AuthRepository implements IAuthRepository {
         User? _result = await _userDBService.readUserData(token: _token);
         if (_result != null) {
           _statusLogger(AuthStatus.authenticated);
-
+          print(_result.name);
           return _result;
         } else {
           await _globalRepo.tokenCache.clearBox();
