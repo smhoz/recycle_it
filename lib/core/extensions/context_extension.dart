@@ -28,6 +28,18 @@ extension PaddingExtension on BuildContext {
   EdgeInsets get paddingLow => EdgeInsets.all(lowHeight);
   EdgeInsets get paddingMedium => EdgeInsets.all(mediumHeight);
   EdgeInsets get paddingHigh => EdgeInsets.all(highHeight);
+
+  EdgeInsets get paddingHorizontalMedium =>
+      EdgeInsets.symmetric(horizontal: mediumHeight);
+  EdgeInsets get paddingVerticalMedium =>
+      EdgeInsets.symmetric(vertical: lowHeight);
+
+  EdgeInsets get onlyRightPaddingMedium => EdgeInsets.only(right: mediumHeight);
+  EdgeInsets get symetricPadding =>
+      EdgeInsets.symmetric(vertical: lowHeight, horizontal: highHeight);
+
+  EdgeInsets get privateBottomBarPadding =>
+      const EdgeInsets.symmetric(horizontal: 20, vertical: 12);
 }
 
 extension DurationExtension on BuildContext {

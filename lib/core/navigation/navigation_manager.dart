@@ -1,11 +1,11 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:hackathon_app/view/pages/home_page/components/profile_component/child_page/wallet_page.dart';
-import 'package:hackathon_app/view/pages/home_page/view/home_page.dart';
-import 'package:hackathon_app/view/pages/splash_page/splash_body.dart';
 
-import '../../view/pages/login_page/login_page.dart';
-import '../../view/pages/register_page/register_page.dart';
-import '../../view/pages/splash_page/splash_page.dart';
+import '../../view/authenticate/login_page/view/login_page.dart';
+import '../../view/authenticate/register_page/view/register_page.dart';
+import '../../view/home/home_page/view/home_page.dart';
+import '../../view/home/profile_page/view/wallet_page.dart';
+import '../../view/home/splash_page/view/splash_body.dart';
+import '../../view/home/splash_page/view/splash_page.dart';
 import '../consts/navigation_const.dart';
 
 @MaterialAutoRouter(

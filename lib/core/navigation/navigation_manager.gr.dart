@@ -13,13 +13,12 @@
 import 'package:auto_route/auto_route.dart' as _i7;
 import 'package:flutter/material.dart' as _i8;
 
-import '../../view/pages/home_page/components/profile_component/child_page/wallet_page.dart'
-    as _i5;
-import '../../view/pages/home_page/view/home_page.dart' as _i3;
-import '../../view/pages/login_page/login_page.dart' as _i2;
-import '../../view/pages/register_page/register_page.dart' as _i4;
-import '../../view/pages/splash_page/splash_body.dart' as _i6;
-import '../../view/pages/splash_page/splash_page.dart' as _i1;
+import '../../view/home/profile_page/view/wallet_page.dart' as _i5;
+import '../../view/home/home_page/view/home_page.dart' as _i3;
+import '../../view/authenticate/login_page/view/login_page.dart' as _i2;
+import '../../view/authenticate/register_page/view/register_page.dart' as _i4;
+import '../../view/home/splash_page/view/splash_body.dart' as _i6;
+import '../../view/home/splash_page/view/splash_page.dart' as _i1;
 
 class AppRouter extends _i7.RootStackRouter {
   AppRouter([_i8.GlobalKey<_i8.NavigatorState>? navigatorKey])

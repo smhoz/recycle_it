@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:google_nav_bar/google_nav_bar.dart';
 
-import '../../../view/pages/home_page/components/map_component/map_component.dart';
-import '../../../view/pages/home_page/components/profile_component/profile_component.dart';
-import '../../../view/pages/home_page/components/shop_component/shop_component.dart';
+import '../../../view/home/home_page/view/map_component.dart';
+import '../../../view/home/profile_page/view/profile_component.dart';
+import '../../../view/home/shop_page/view/shop_page.dart';
+
 
 class BottomBarItems {
   static BottomBarItems? _instance;
@@ -11,22 +13,22 @@ class BottomBarItems {
 
   final List<Widget> pages = const <Widget>[
     MapComponent(),
-    ShopComponent(),
-    ProfileComponent()
+    ShopPage(),
+    ProfilePage()
   ];
 
-  final List<BottomNavigationBarItem> items = const <BottomNavigationBarItem>[
-    BottomNavigationBarItem(
-      icon: Icon(Icons.home),
-      label: 'Home',
+  final List<GButton> items = const <GButton>[
+    GButton(
+      icon: Icons.home_filled,
+      text: 'Home',
     ),
-    BottomNavigationBarItem(
-      icon: Icon(Icons.shopping_basket),
-      label: 'Shop',
+    GButton(
+      icon: Icons.shopping_bag_outlined,
+      text: 'Mağaza',
     ),
-    BottomNavigationBarItem(
-      icon: Icon(Icons.person),
-      label: 'Profile',
-    )
+    GButton(
+      icon: Icons.person_outline_outlined,
+      text: 'Profile',
+    ),
   ];
 }

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hackathon_app/core/extensions/context_extension.dart';
-import 'package:hackathon_app/view/pages/home_page/components/profile_component/profile_form/cubit/profileform_cubit.dart';
 import 'package:hackathon_app/view/widgets/_custom_text_field.dart';
 
+import '../../../../../home/profile_page/viewmodel/cubit/profileform_cubit.dart';
 import '../../../../../widgets/_widget_const.dart';
 
 class ProfileForm extends StatelessWidget {

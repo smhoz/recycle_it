@@ -1,7 +1,8 @@
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
 
-import '../../../view/pages/home_page/viewmodel/home_view_model.dart';
+import '../../../view/home/home_page/viewmodel/home_view_model.dart';
+import '../../../view/home/shop_page/viewmodel/shop_view_model.dart';
 
 class ProviderList {
   static ProviderList? _instance;
@@ -12,5 +13,8 @@ class ProviderList {
     ChangeNotifierProvider<HomeViewModel>(
       create: (context) => HomeViewModel(),
     ),
+    ChangeNotifierProvider<ShopViewModel>(
+      create: (context) => ShopViewModel(),
+    )
   ];
 }

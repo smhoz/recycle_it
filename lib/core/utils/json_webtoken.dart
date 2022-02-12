@@ -20,10 +20,8 @@ class JwtManager {
 
       return _result.payload;
     } on JWTExpiredError {
-      print('jwt expired');
       return null;
     } on JWTError catch (ex) {
-      print(ex.message); // ex: invalid signature
       return null;
     }
   }

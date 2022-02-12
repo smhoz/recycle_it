@@ -1,8 +1,8 @@
 import 'package:get_it/get_it.dart';
 import 'package:hackathon_app/core/repository/auth_repository.dart';
-import 'package:hackathon_app/view/pages/home_page/components/profile_component/bloc/profile_bloc.dart';
-import 'package:hackathon_app/view/pages/home_page/components/profile_component/child_page/cubit/balance_cubit.dart';
 
+import '../../view/home/profile_page/view/cubit/balance_cubit.dart';
+import '../../view/home/profile_page/viewmodel/bloc/profile_bloc.dart';
 import '../repository/global_repositor.dart';
 
 final getIt = GetIt.instance;

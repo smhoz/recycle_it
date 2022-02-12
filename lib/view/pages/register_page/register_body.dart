@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../authenticate/register_page/viewmodel/cubit/register_cubit.dart';
 import '../../widgets/_custom_text_field.dart';
 import '../../widgets/_print_message.dart';
 import '../../widgets/_validators.dart';
 import '../../widgets/_widget_const.dart';
-import 'cubit/register_cubit.dart';
 
 class RegisterBody extends StatelessWidget {
   const RegisterBody({Key? key}) : super(key: key);
