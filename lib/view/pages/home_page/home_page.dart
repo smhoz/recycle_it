@@ -46,7 +46,7 @@ class _BottomNavigationBar extends StatelessWidget {
               label: 'Profile',
             )
           ],
-          currentIndex: homeCubit.state.index,
+          currentIndex: state.index,
           selectedItemColor: Colors.red,
           onTap: homeCubit.onIndexChange,
         );

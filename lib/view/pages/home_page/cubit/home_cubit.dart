@@ -9,16 +9,21 @@ import '../components/profile_component/profile_component.dart';
 part 'home_state.dart';
 
 class HomeCubit extends Cubit<HomeState> {
-  HomeCubit() : super(const BottomInitial(MapComponet()));
-  int selectedIndex = 0;
-
+  HomeCubit() : super(const BottomInitial(MapComponent()));
   onIndexChange(int index) {
-    if (index == 0) {
-      emit(HomeChanged(const MapComponet(), index));
-    } else if (index == 1) {
-      emit(HomeChanged(const ShopComponent(), index));
-    } else {
-      emit(HomeChanged(const ProfileComponent(), index));
+    switch (index) {
+      case 0:
+        emit(HomeChanged(const MapComponent(), index));
+        break;
+      case 1:
+        emit(HomeChanged(const ShopComponent(), index));
+        break;
+      case 2:
+        emit(HomeChanged(const ProfileComponent(), index));
+        break;
+      default:
+        emit(HomeChanged(const MapComponent(), index));
+        break;
     }
   }
 }
