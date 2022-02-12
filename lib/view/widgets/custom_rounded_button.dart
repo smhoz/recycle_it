@@ -27,24 +27,19 @@ class CustomRoundedButton extends StatelessWidget {
         child: Container(
           width: double.infinity,
           decoration: BoxDecoration(
-            color: Theme.of(context).primaryColor,
+            color: context.theme.primaryColor,
             borderRadius: BorderRadius.circular(borderRadius!),
           ),
           child: TextButton.icon(
-            style: ButtonStyle(
-              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(borderRadius!),
-                ),
-              ),
-              overlayColor: MaterialStateProperty.all(
-                  Colors.grey.shade300.withOpacity(0.3)),
-            ),
             onPressed: onTap,
-            icon: icon!,
+            icon: icon ??
+                Icon(
+                  Icons.arrow_forward_ios,
+                  color: context.theme.cardColor,
+                ),
             label: Text(
               title!,
-              style: context.textTheme.headline1!.copyWith(
+              style: context.textTheme.bodyText1!.copyWith(
                 letterSpacing: 2,
                 color: context.theme.cardColor,
               ),
