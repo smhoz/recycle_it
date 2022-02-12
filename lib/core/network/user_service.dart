@@ -35,7 +35,8 @@ class UserService implements IUserService {
     required String surname,
     required String mail,
   }) async {
-    User _data = User(mail: mail, name: name, surname: surname, uid: uid);
+    User _data =
+        User(mail: mail, name: name, surname: surname, uid: uid, balance: "0");
     bool _result =
         await _dbService.postUserData(data: _data.toMap(), id: _data.uid ?? "");
     return _result;
