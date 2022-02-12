@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:hackathon_app/core/extensions/context_extension.dart';
-import 'package:hackathon_app/view/widgets/_custom_text_field.dart';
-import 'package:hackathon_app/view/widgets/_widget_const.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hackathon_app/view/pages/home_page/components/profile_component/child_page/wallet_form.dart';
 import 'package:hackathon_app/view/widgets/input_field.dart';
 
-class WalletPage extends StatelessWidget {
-  const WalletPage({Key? key}) : super(key: key);
+import '../../../../../widgets/_widget_const.dart';
+import 'cubit/balance_cubit.dart';
 
+class WalletPage extends StatelessWidget {
+  WalletPage({Key? key}) : super(key: key);
+  final _cubit = BalanceCubit();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,37 +25,34 @@ class WalletPage extends StatelessWidget {
           child: Text("Payment"),
         ),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+      body: BlocProvider(
+        create: (context) => _cubit,
+        child: ListView(
           children: [
-            const SizedBox(
-              height: 50.0,
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 32.0, vertical: 8.0),
+            WC.paddingAll(
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  IncrementButton(iconName: Icons.remove),
-                  Flexible(
-                    child: InputField(
-                      title: "Amount",
-                    ),
-                  ),
-                  IncrementButton(iconName: Icons.add),
+                  _IconButton(
+                      iconName: Icons.remove,
+                      changeValue: _cubit.balanceDecrement),
+                  const _BalanceInput(),
+                  _IconButton(
+                      iconName: Icons.add,
+                      changeValue: _cubit.balanceIncrement),
                 ],
               ),
             ),
             const SizedBox(
-              height: 50.0,
+              height: 50,
             ),
-            Text(
+            const Text(
               "Card Info",
-              style: context.textTheme.headline1,
             ),
-            _CardForm(),
+            WalletForm(),
+            WC.paddingAll(
+                child: ElevatedButton(onPressed: () {}, child: Text('Submit')))
           ],
         ),
       ),
@@ -61,13 +60,14 @@ class WalletPage extends StatelessWidget {
   }
 }
 
-class IncrementButton extends StatelessWidget {
+class _IconButton extends StatelessWidget {
   final IconData iconName;
-  const IncrementButton({
+  const _IconButton({
     Key? key,
+    required Function this.changeValue,
     required this.iconName,
   }) : super(key: key);
-
+  final Function changeValue;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -78,27 +78,24 @@ class IncrementButton extends StatelessWidget {
       child: IconButton(
         color: Colors.white,
         iconSize: 32,
-        onPressed: () {},
+        onPressed: () => changeValue(),
         icon: Icon(iconName),
       ),
     );
   }
 }
 
-class _CardForm extends StatefulWidget {
-  _CardForm({Key? key}) : super(key: key);
+class _BalanceInput extends StatelessWidget {
+  const _BalanceInput({Key? key}) : super(key: key);
 
-  @override
-  State<_CardForm> createState() => __CardFormState();
-}
-
-class __CardFormState extends State<_CardForm> {
-  final _key = GlobalKey<FormState>();
-  final _cardController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [CustomTextFormField(controller: _cardController)],
+    final _cubit = context.read<BalanceCubit>();
+    return Flexible(
+      child: InputField(
+        controller: _cubit.balanceController,
+        textInputType: TextInputType.number,
+      ),
     );
   }
 }
