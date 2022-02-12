@@ -23,7 +23,8 @@ dependencies:
   #tools
   equatable: ^2.0.3
   flutter_dotenv: ^5.0.2
-  dart_jsonwebtoken: ^2.4.0  
+  dart_jsonwebtoken: ^2.4.0
+
   #network
   dio: ^4.0.4
 
@@ -40,6 +41,9 @@ dependencies:
 
   #localDb
   hive_flutter: ^1.1.0
+
+  #Google Services
+  google_maps_flutter: ^2.1.1
 
   
 
