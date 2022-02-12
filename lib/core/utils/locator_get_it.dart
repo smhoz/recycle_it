@@ -1,5 +1,6 @@
 import 'package:get_it/get_it.dart';
 import 'package:hackathon_app/core/repository/auth_repository.dart';
+import 'package:hackathon_app/view/pages/home_page/components/profile_component/bloc/profile_bloc.dart';
 
 import '../repository/global_repositor.dart';
 
@@ -13,4 +14,6 @@ void setupGetIt() {
     return _result;
   });
   getIt.registerLazySingleton<AuthRepository>(() => AuthRepository());
+
+  getIt.registerLazySingleton<ProfileBloc>(() => ProfileBloc());
 }
