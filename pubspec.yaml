@@ -14,40 +14,48 @@ dependencies:
   flutter:
     sdk: flutter
 
-  #navigation
+  #Navigation
   auto_route: ^3.2.2
 
-  #service locator
+  #Service Locator
   get_it: ^7.2.0
 
-  #tools
+  #Tools
   equatable: ^2.0.3
   flutter_dotenv: ^5.0.2
   dart_jsonwebtoken: ^2.4.0
 
-  #network
+  #Network
   dio: ^4.0.4
 
-  #state management
+  #State Management
   flutter_bloc: ^8.0.1
+  provider: ^6.0.2
 
-  #firebase_auth_rest
+  #Firebase_auth_rest
+  
   firebase_auth_rest:
     path: modules/firebase_auth_rest
 
-  #firebase_db_rest
+  #Firebase_db_rest
   firebase_db_rest:
     path: modules/firebase_db_rest
 
-  #localDb
+  #Local DB
   hive_flutter: ^1.1.0
 
   #Google Services
   google_maps_flutter: ^2.1.1
 
-  
+  #Firebase
+  cloud_firestore: ^3.1.8
+  firebase_core: ^1.12.0
 
+
+  
+  #UI Utility
   cupertino_icons: ^1.0.2
+  google_nav_bar: ^5.0.5
 
 dev_dependencies:
   flutter_test:
@@ -60,10 +68,21 @@ dev_dependencies:
 
 
 flutter:
+  fonts:
+    - family: MontSerrat
+      fonts:
+        - asset: assets/fonts/Montserrat-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/Montserrat-Regular.ttf
+        - asset: assets/fonts/Montserrat-Light.ttf
+          weight: 300  
   
   
   assets:
  
     - .env
+
+
+
   uses-material-design: true
 
