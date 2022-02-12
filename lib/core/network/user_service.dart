@@ -12,6 +12,8 @@ abstract class IUserService {
     required String surname,
     required String mail,
   });
+  Future<bool> updateUserData(
+      {required String uid, String? name, String? surname, String? mail});
 }
 
 class UserService implements IUserService {
@@ -39,6 +41,19 @@ class UserService implements IUserService {
         User(mail: mail, name: name, surname: surname, uid: uid, balance: "0");
     bool _result =
         await _dbService.postUserData(data: _data.toMap(), id: _data.uid ?? "");
+    return _result;
+  }
+
+  @override
+  Future<bool> updateUserData(
+      {required String uid,
+      String? name,
+      String? surname,
+      String? mail}) async {
+    User _data =
+        User(mail: mail, name: name, surname: surname, uid: uid, balance: "0");
+    bool _result =
+        await _dbService.updateUser(map: _data.toMap(), spesificId: uid);
     return _result;
   }
 }

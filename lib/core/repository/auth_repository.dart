@@ -42,7 +42,7 @@ class AuthRepository implements IAuthRepository {
         User? _result = await _userDBService.readUserData(token: _token);
         if (_result != null) {
           _statusLogger(AuthStatus.authenticated);
-          print(_result.name);
+
           return _result;
         } else {
           await _globalRepo.tokenCache.clearBox();
@@ -118,8 +118,12 @@ class AuthRepository implements IAuthRepository {
 
   @override
   Future<bool> updateUserData(
-      {required String uid, String? name, String? surname, String? mail}) {
-    // TODO: implement updateUserData
-    throw UnimplementedError();
+      {required String uid,
+      String? name,
+      String? surname,
+      String? mail}) async {
+    bool _result = await _userDBService.updateUserData(
+        uid: uid, mail: mail, name: name, surname: surname);
+    return _result;
   }
 }
