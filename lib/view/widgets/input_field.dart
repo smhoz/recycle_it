@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:hackathon_app/core/extensions/context_extension.dart';
 
 class InputField extends StatelessWidget {
@@ -13,21 +14,22 @@ class InputField extends StatelessWidget {
   final Function(String)? validator;
   final int? maxLength;
 
-  InputField(
-      {Key? key,
-      this.title,
-      this.icon,
-      this.isPassword = false,
-      this.textInputType = TextInputType.text,
-      this.borderRadius = 64,
-      this.padding = const EdgeInsets.symmetric(vertical: 8, horizontal: 32),
-      this.prefix = "",
-      this.helperText,
-      this.validator,
-      this.maxLength})
-      : super(key: key);
+  InputField({
+    Key? key,
+    this.title,
+    this.icon,
+    this.isPassword = false,
+    this.textInputType = TextInputType.text,
+    this.prefix = "",
+    this.helperText,
+    this.borderRadius = 64,
+    this.padding = const EdgeInsets.symmetric(vertical: 8, horizontal: 32),
+    this.validator,
+    this.maxLength,
+    required this.controller,
+  }) : super(key: key);
 
-  final controller = TextEditingController();
+  final TextEditingController controller;
   final formKey = GlobalKey<FormState>();
 
   @override
@@ -57,27 +59,31 @@ class InputField extends StatelessWidget {
           ),
           Form(
             key: formKey,
-            child: TextFormField(
-              maxLength: maxLength,
-              controller: controller,
-              obscureText: isPassword!,
-              keyboardType: textInputType,
-              validator: emptyValidator!,
-              autovalidateMode: AutovalidateMode.onUserInteraction,
-              decoration: InputDecoration(
-                labelText: title,
-                prefixIcon: icon,
-                helperText: helperText,
-                prefixText: prefix,
-                filled: true,
-                fillColor: context.theme.cardColor,
-                prefixIconConstraints: const BoxConstraints(minWidth: 72),
-                border: border,
-                enabledBorder: border.copyWith(
-                    borderSide: BorderSide(color: context.theme.cardColor)),
-                focusedBorder: border.copyWith(
-                  borderSide: BorderSide(
-                    color: context.themeColor.secondary,
+            child: Center(
+              child: TextFormField(
+                maxLength: maxLength,
+                textAlign: TextAlign.center,
+                controller: controller,
+                readOnly: true,
+                obscureText: isPassword!,
+                keyboardType: textInputType,
+                validator: emptyValidator!,
+                autovalidateMode: AutovalidateMode.onUserInteraction,
+                decoration: InputDecoration(
+                  labelText: title,
+                  prefixIcon: icon,
+                  helperText: helperText,
+                  prefixText: prefix,
+                  filled: true,
+                  fillColor: context.theme.cardColor,
+                  prefixIconConstraints: const BoxConstraints(minWidth: 72),
+                  border: border,
+                  enabledBorder: border.copyWith(
+                      borderSide: BorderSide(color: context.theme.cardColor)),
+                  focusedBorder: border.copyWith(
+                    borderSide: BorderSide(
+                      color: context.themeColor.secondary,
+                    ),
                   ),
                 ),
               ),

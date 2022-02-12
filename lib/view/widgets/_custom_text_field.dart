@@ -16,6 +16,7 @@ class CustomTextFormField extends StatelessWidget {
   final bool? obscureText;
   final IconData? icon;
   final Function(String? value)? onChanged;
+
   final String? Function(String? value)? customValidator;
   @override
   Widget build(BuildContext context) {

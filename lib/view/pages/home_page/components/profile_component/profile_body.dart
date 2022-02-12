@@ -58,20 +58,17 @@ class _CardContainer extends StatelessWidget {
       margin: const EdgeInsets.all(10.0),
       height: 70.0,
       child: ListTile(
+        onTap: () => context.router.pushNamed(RouteConsts.WALLET_PAGE),
         leading: const CircleAvatar(
           backgroundColor: Colors.grey,
         ),
         title: Text(
           "My Wallet",
-          style: context.textTheme.headline1,
+          style: context.textTheme.headline5,
         ),
         subtitle:
             Text((getIt<GlobalRepository>().user?.balance ?? 0).toString()),
-        trailing: IconButton(
-            onPressed: (() {
-              context.router.pushNamed(RouteConsts.WALLET_PAGE);
-            }),
-            icon: const Icon(Icons.arrow_forward_ios)),
+        trailing: const Icon(Icons.arrow_forward_ios),
       ),
     );
   }
