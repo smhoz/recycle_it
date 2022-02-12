@@ -10,6 +10,13 @@ extension ContextExtension on BuildContext {
   double get highHeight => height * 0.04;
 }
 
+extension ScaffoldExtension on BuildContext {
+  dynamic showBottomSheet({Widget? child}) => Scaffold.of(this).showBottomSheet(
+        (context) => child!,
+        backgroundColor: Colors.transparent,
+      );
+}
+
 extension ThemeExtension on BuildContext {
   ThemeData get theme => Theme.of(this);
   TextTheme get textTheme => Theme.of(this).textTheme;
