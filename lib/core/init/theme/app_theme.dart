@@ -7,12 +7,12 @@ class AppTheme {
 
   ThemeData get theme => ThemeData(
         iconTheme: const IconThemeData(color: Colors.white, size: 20),
-        cardColor: Colors.grey.shade200,
+        cardColor: Colors.white,
         bottomAppBarColor: Colors.yellow,
-        colorScheme: ColorScheme.light(
-          primary: const Color(0xFFf34282),
-          onPrimary: const Color(0xFFf34282),
-          secondary: const Color(0xFFfedadc),
+        colorScheme: const ColorScheme.light(
+          primary: Color(0xFFf34282),
+          onPrimary: Color(0xFFf34282),
+          secondary: Color(0xFFfedadc),
         ),
       );
 }
