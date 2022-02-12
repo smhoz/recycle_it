@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class MapComponet extends StatelessWidget {
-  const MapComponet({Key? key}) : super(key: key);
+class MapComponent extends StatelessWidget {
+  const MapComponent({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
