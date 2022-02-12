@@ -2,7 +2,9 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:hackathon_app/core/extensions/context_extension.dart';
 import 'package:hackathon_app/core/model/container_model.dart';
+import 'package:hackathon_app/view/widgets/custom_bottom_sheet.dart';
 
 class MapComponent extends StatelessWidget {
   const MapComponent({Key? key}) : super(key: key);
@@ -68,7 +70,13 @@ class _MapWidgetState extends State<MapWidget> {
                   infoWindow:
                       InfoWindow(title: widget.containers![index].name!),
                   onTap: () {
-                    //TODO: Show Container Info Bottom Sheet
+                    context.showBottomSheet(
+                      child: CustomBottomSheet(
+                        initialSize: 0.25,
+                        maxSize: 0.5,
+                        child: Text(widget.containers![index].name!),
+                      ),
+                    );
                   },
                 ),
               ).toSet(),
