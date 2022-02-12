@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hackathon_app/core/utils/locator_get_it.dart';
 import 'package:hackathon_app/view/pages/home_page/components/profile_component/child_page/wallet_form.dart';
 import 'package:hackathon_app/view/widgets/input_field.dart';
 
 import '../../../../../widgets/_widget_const.dart';
+import 'components/_alert_dialog.dart';
 import 'cubit/balance_cubit.dart';
 
 class WalletPage extends StatelessWidget {
   WalletPage({Key? key}) : super(key: key);
-  final _cubit = BalanceCubit();
   @override
   Widget build(BuildContext context) {
+    final _cubit = getIt<BalanceCubit>();
+
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 80.0,
@@ -50,9 +53,13 @@ class WalletPage extends StatelessWidget {
             const Text(
               "Card Info",
             ),
-            WalletForm(),
+            const WalletForm(),
             WC.paddingAll(
-                child: ElevatedButton(onPressed: () {}, child: Text('Submit')))
+                child: ElevatedButton(
+                    onPressed: () {
+                      WalletAlertDialog.showMyDialog(context);
+                    },
+                    child: const Text('Submit')))
           ],
         ),
       ),

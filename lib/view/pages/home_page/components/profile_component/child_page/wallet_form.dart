@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hackathon_app/core/extensions/context_extension.dart';
+import 'package:hackathon_app/core/utils/locator_get_it.dart';
 import 'package:hackathon_app/view/pages/home_page/components/profile_component/child_page/cubit/balance_cubit.dart';
 import 'package:hackathon_app/view/widgets/_custom_text_field.dart';
 import 'package:hackathon_app/view/widgets/_widget_const.dart';
@@ -9,7 +10,7 @@ class WalletForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _cubit = BalanceCubit();
+    final _cubit = getIt<BalanceCubit>();
     return SizedBox(
       width: context.width,
       height: context.height * 0.4,
@@ -38,7 +39,7 @@ class WalletForm extends StatelessWidget {
             labelText: 'Cardholder\'s name',
           ),
           WC.tpDivider,
-          _Switch(),
+          const _Switch(),
         ],
       ),
     );

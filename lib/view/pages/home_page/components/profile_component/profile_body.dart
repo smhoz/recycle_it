@@ -18,19 +18,21 @@ class ProfileBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          const _CircleAvatar(),
-          BlocBuilder<ProfileBloc, ProfileState>(
-            buildWhen: (previous, current) => previous != current,
-            builder: (context, state) {
-              return ProfileForm();
-            },
-          ),
-          const _CardContainer(),
-          const _LogOutButton()
-        ],
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            const _CircleAvatar(),
+            BlocBuilder<ProfileBloc, ProfileState>(
+              buildWhen: (previous, current) => previous != current,
+              builder: (context, state) {
+                return ProfileForm();
+              },
+            ),
+            const _CardContainer(),
+            const _LogOutButton()
+          ],
+        ),
       ),
     );
   }
@@ -73,8 +75,13 @@ class _CardContainer extends StatelessWidget {
           "My Wallet",
           style: context.textTheme.headline5,
         ),
-        subtitle:
-            Text((getIt<GlobalRepository>().user?.balance ?? 0).toString()),
+        subtitle: BlocBuilder<ProfileBloc, ProfileState>(
+          buildWhen: (previous, current) => previous != current,
+          builder: (context, state) {
+            return Text(
+                (getIt<GlobalRepository>().user?.balance ?? 0).toString());
+          },
+        ),
         trailing: const Icon(Icons.arrow_forward_ios),
       ),
     );
