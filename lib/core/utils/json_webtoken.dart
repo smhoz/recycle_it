@@ -5,7 +5,7 @@ class JwtManager {
   final String _secretKey = dotenv.env['JWT_SECRET_KEY'] as String;
   String signJwt(dynamic _data) {
     JWT _jwt = JWT(_data);
-    int _expiredTime = 10;
+    int _expiredTime = 1000;
 
     String token = _jwt.sign(SecretKey(_secretKey),
         expiresIn: Duration(seconds: _expiredTime));

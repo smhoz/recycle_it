@@ -17,6 +17,8 @@ abstract class IAuthRepository {
       required String surname,
       required String mail,
       required String password});
+  Future<bool> updateUserData(
+      {required String uid, String? name, String? surname, String? mail});
 }
 
 class AuthRepository implements IAuthRepository {
@@ -112,5 +114,12 @@ class AuthRepository implements IAuthRepository {
   void _statusLogger(AuthStatus value) {
     _authStatus = value;
     _authStatus = value;
+  }
+
+  @override
+  Future<bool> updateUserData(
+      {required String uid, String? name, String? surname, String? mail}) {
+    // TODO: implement updateUserData
+    throw UnimplementedError();
   }
 }
