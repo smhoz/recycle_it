@@ -55,10 +55,11 @@ class _SubmitButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final _registerpageCubit = context.read<RegisterCubit>();
     return BlocListener<RegisterCubit, RegisterState>(
+      listenWhen: (previous, current) => previous != current,
       listener: (context, state) {
         if (state is RegisterError) {
           PrintMessage.showFailed(context, state.errorMessage);
-        }else {
+        } else if (state is RegisterCompleted) {
           PrintMessage.showSucces(context);
         }
       },

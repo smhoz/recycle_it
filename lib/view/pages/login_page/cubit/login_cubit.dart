@@ -22,7 +22,7 @@ class LoginCubit extends Cubit<LoginState> {
     if (_result) {
       emit(LoginCompleted());
     } else {
-      emit(LoginError(errorMessage: _authRepository.errorMessage));
+      emit(const LoginError(errorMessage: "Something went wrong"));
     }
   }
 
