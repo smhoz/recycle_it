@@ -56,4 +56,11 @@ class UserService implements IUserService {
         await _dbService.updateUser(map: _data.toMap(), spesificId: uid);
     return _result;
   }
+
+  Future<bool> updateBalance(
+      {required String uid, required String balance}) async {
+    bool _result =
+        await _dbService.increaseBalance(balance: balance, spesificId: uid);
+    return _result;
+  }
 }

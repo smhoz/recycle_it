@@ -64,4 +64,27 @@ class DBService {
       rethrow;
     }
   }
+
+  Future<dynamic> increaseBalance(
+      {required String balance, required String spesificId}) async {
+    final _query =
+        'https://hackathon-app-2022-default-rtdb.europe-west1.firebasedatabase.app/users.json?orderBy="uid"&equalTo="$spesificId"';
+    Dio _newDio = Dio();
+
+    try {
+      Response _temporary = await _newDio.get(_query);
+      late String _keyId;
+      (_temporary.data as Map).forEach((key, value) => _keyId = key);
+
+      Response _response =
+          await _dio.patch("/users/$_keyId.json", data: {"balance": balance});
+      if (_response.statusCode == 200) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
 }
