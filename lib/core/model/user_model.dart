@@ -5,6 +5,7 @@ class User {
   String? name;
   String? surname;
   String? mail;
+  String? balance;
 
   String? phoneNumber;
 
@@ -14,6 +15,7 @@ class User {
     this.surname,
     this.mail,
     this.phoneNumber,
+    this.balance,
   });
 
   Map<String, dynamic> toMap() {
@@ -23,6 +25,7 @@ class User {
       'surname': surname,
       'mail': mail,
       'phone_number': phoneNumber,
+      'balance': balance,
     };
   }
 
@@ -33,6 +36,7 @@ class User {
       surname: map['surname'],
       mail: map['mail'],
       phoneNumber: map['phone_number'],
+      balance: map['balance'].toString(),
     );
   }
 
