@@ -21,7 +21,7 @@ class LoginBody extends StatelessWidget {
       listenWhen: (previous, current) => current is LoginError,
       listener: (context, state) {
         if (state is LoginError) {
-          PrintMessage.showFailed(context, state.errorMessage);
+          PrintMessage.showFailed(context, message: state.errorMessage);
         }
       },
       child: form(_loginpageCubit),

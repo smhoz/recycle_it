@@ -90,7 +90,7 @@ class _SubmitButton extends StatelessWidget {
           current is RegisterError || current is RegisterCompleted,
       listener: (context, state) async {
         if (state is RegisterError) {
-          PrintMessage.showFailed(context, state.errorMessage);
+          PrintMessage.showFailed(context, message: state.errorMessage);
         } else {
           PrintMessage.showSucces(context);
           context.router.replace(const AuthControllerRoute());
