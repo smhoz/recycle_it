@@ -16,8 +16,8 @@ class ShopPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
+    return SafeArea(
+      child: SingleChildScrollView(
         child: Column(
           children: [
             Consumer<ShopViewModel>(
@@ -26,7 +26,10 @@ class ShopPage extends StatelessWidget {
                   case ShopState.loading:
                     return const CenterCircularProgress();
                   case ShopState.complete:
-                    return _body(context, viewModel);
+                    return Padding(
+                      padding: context.paddingLow,
+                      child: _body(context, viewModel),
+                    );
                   default:
                     return CenterError(
                       error: viewModel.error,
@@ -41,27 +44,31 @@ class ShopPage extends StatelessWidget {
   }
 
   Widget _body(BuildContext context, ShopViewModel viewModel) {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          SizedBox(
-            height: context.height * 0.1,
-            child: _categoriesList(context, viewModel),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: context.homesymetricPadding,
+          child: Text(
+            "Mağaza",
+            style: context.textTheme.bodyText1!
+                .copyWith(fontSize: 28, fontWeight: FontWeight.w500),
           ),
-          SizedBox(
-            height: context.height * 0.5,
-            child: Padding(
-              padding: context.paddingMedium,
-              child: _shopLists(viewModel),
-            ),
-          ),
-          TitleTextWithContainer(
-            text: "Populer",
-            child: SizedBox(
-                height: context.height * 0.18, child: _shopLists(viewModel)),
-          )
-        ],
-      ),
+        ),
+        SizedBox(
+          height: context.height * 0.1,
+          child: _categoriesList(context, viewModel),
+        ),
+        SizedBox(
+          height: context.height * 0.5,
+          child: _shopLists(viewModel),
+        ),
+        TitleTextWithContainer(
+          text: "Populer",
+          child: SizedBox(
+              height: context.height * 0.18, child: _shopLists(viewModel)),
+        )
+      ],
     );
   }
 
