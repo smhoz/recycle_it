@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hackathon_app/core/consts/app/app_constant.dart';
 
 class AppTheme {
   static AppTheme? _instance;
@@ -6,7 +7,9 @@ class AppTheme {
   static AppTheme get instance => _instance ??= AppTheme._();
 
   ThemeData get theme => ThemeData(
-        fontFamily: "MontSerrat",
+        fontFamily: AppConstant.FONT_FAMILY,
+        appBarTheme: const AppBarTheme(
+            iconTheme: IconThemeData(color: Colors.black, size: 24)),
         iconTheme: const IconThemeData(color: Colors.white, size: 20),
         cardColor: Colors.white,
         cardTheme: const CardTheme(elevation: 4),
@@ -14,7 +17,7 @@ class AppTheme {
         colorScheme: ColorScheme.light(
           primary: const Color(0xFF76acb8),
           onPrimary: Colors.grey[100]!,
-          secondary: const Color(0xFFfedadc),
+          secondary: Colors.green,
         ),
       );
 
