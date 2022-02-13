@@ -65,7 +65,7 @@ class ConvertPage extends StatelessWidget {
               ),
             ),
           ),
-          CustomAnimationRoundedButton(
+          CustomRoundedButton(
             title: 'DÖNÜŞTÜR',
             onTap: () async {
               final _userDBService = UserService();
