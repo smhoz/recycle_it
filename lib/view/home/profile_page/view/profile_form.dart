@@ -1,8 +1,12 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/components/button/custom_rounded_button.dart';
 import 'package:hackathon_app/core/components/text/input_field.dart';
 
+import '../../../../core/navigation/navigation_manager.gr.dart';
+import '../../../../core/repository/auth_repository.dart';
+import '../../../../core/utils/locator_get_it.dart';
 import '../viewmodel/cubit/profileform_cubit.dart';
 
 class ProfileForm extends StatelessWidget {
@@ -43,7 +47,6 @@ class ProfileForm extends StatelessWidget {
                     onTap: state is ProfileformButtonActive
                         ? () => _cubit.update()
                         : null,
-                    icon: const Icon(Icons.send),
                     title: 'Güncelle');
               }
             },
