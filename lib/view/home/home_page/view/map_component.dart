@@ -57,7 +57,7 @@ class MapComponent extends StatelessWidget {
         Icons.qr_code_scanner,
         color: Colors.white,
       ),
-      title: "SCAN",
+      title: " TARA",
       onTap: () => Navigator.push(
         context,
         MaterialPageRoute(

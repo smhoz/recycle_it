@@ -149,37 +149,61 @@ class ItemCard extends StatelessWidget {
       child: GestureDetector(
         onTap: () =>
             context.showBottomSheet(child: BuyItemBottomSheet(item: item)),
-        child: Container(
-          alignment: Alignment.bottomLeft,
-          margin: context.paddingLow,
-          decoration: BoxDecoration(
-            borderRadius: CustomBorderRadius.normalCircular(),
-            image: DecorationImage(
-              image: NetworkImage(
-                item!.imageURL.toString(),
-              ),
-            ),
-          ),
-          width: context.width * 0.7,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Padding(
-                padding: context.paddingLow,
-                child: Text(
-                  item!.title.toString(),
-                  style: context.textTheme.bodyText1!.copyWith(fontSize: 15),
-                  maxLines: 2,
+        child: Stack(
+          alignment: Alignment.topRight,
+          children: [
+            _priceRow(context),
+            Container(
+              alignment: Alignment.bottomLeft,
+              margin: context.paddingLow,
+              decoration: BoxDecoration(
+                borderRadius: CustomBorderRadius.normalCircular(),
+                image: DecorationImage(
+                  image: NetworkImage(
+                    item!.imageURL.toString(),
+                  ),
                 ),
               ),
-              const Icon(
-                Icons.arrow_forward_ios,
-                color: Colors.black,
-              )
-            ],
-          ),
+              width: context.width * 0.7,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Padding(
+                    padding: context.paddingLow,
+                    child: Text(
+                      item!.title.toString(),
+                      style:
+                          context.textTheme.bodyText1!.copyWith(fontSize: 15),
+                      maxLines: 2,
+                    ),
+                  ),
+                  const Icon(
+                    Icons.arrow_forward_ios,
+                    color: Colors.black,
+                  )
+                ],
+              ),
+            ),
+          ],
         ),
       ),
+    );
+  }
+
+  Widget _priceRow(BuildContext context) {
+    return Padding(
+      padding: context.paddingLow,
+      child: Row(mainAxisAlignment: MainAxisAlignment.end, children: [
+        Icon(
+          Icons.circle,
+          color: CustomColors.instance.coinColor,
+          size: 24,
+        ),
+        SizedBox(
+          width: context.width * 0.02,
+        ),
+        Text("₺${item!.price!.toString()}")
+      ]),
     );
   }
 }
