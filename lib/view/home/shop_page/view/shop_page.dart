@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hackathon_app/view/home/shop_page/view/buy_item_bottom_sheet.dart';
 import '../../../../core/components/center/center_circular_indicator.dart';
 import '../../../../core/components/center/center_error.dart';
 import '../../../../core/extensions/context_extension.dart';
@@ -119,7 +120,9 @@ class ShopPage extends StatelessWidget {
         boxShadow: [CustomColors.instance.containerBoxShadow]);
   }
 
-  ListView _shopLists(ShopViewModel viewModel, {double? width}) {
+  ListView _shopLists(
+    ShopViewModel viewModel,
+  ) {
     List<Item> items = (viewModel
         .itemCategories[viewModel.currentIndex].entities as List<Item>);
 
@@ -127,44 +130,62 @@ class ShopPage extends StatelessWidget {
       scrollDirection: Axis.horizontal,
       itemCount: items.length,
       itemBuilder: (context, index) {
-        return Card(
-          shape: RoundedRectangleBorder(
-              borderRadius: CustomBorderRadius.normalCircular()),
-          margin: context.paddingMedium,
-          child: GestureDetector(
-            onTap: () {},
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Container(
-                  decoration: BoxDecoration(
-                      borderRadius: CustomBorderRadius.normalCircular(),
-                      image: DecorationImage(
-                          image:
-                              NetworkImage(items[index].imageURL.toString()))),
-                  width: width ?? context.width * 0.7,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          items[index].title.toString(),
-                          style: context.textTheme.bodyText1!
-                              .copyWith(fontSize: 15),
-                          maxLines: 2,
-                        ),
-                      ),
-                      const Icon(
-                        Icons.arrow_forward_ios,
-                        color: Colors.black,
-                      )
-                    ],
-                  )),
-            ),
-          ),
+        return ListView.builder(
+          scrollDirection: Axis.horizontal,
+          itemCount: items.length,
+          itemBuilder: (context, index) {
+            return ItemCard(item: items[index]);
+          },
         );
       },
+    );
+  }
+}
+
+class ItemCard extends StatelessWidget {
+  final Item? item;
+  const ItemCard({Key? key, this.item}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      shape: RoundedRectangleBorder(
+          borderRadius: CustomBorderRadius.normalCircular()),
+      margin: context.paddingMedium,
+      child: GestureDetector(
+        onTap: () =>
+            context.showBottomSheet(child: BuyItemBottomSheet(item: item)),
+        child: Container(
+          alignment: Alignment.bottomLeft,
+          margin: const EdgeInsets.all(8.0),
+          decoration: BoxDecoration(
+            borderRadius: CustomBorderRadius.normalCircular(),
+            image: DecorationImage(
+              image: NetworkImage(
+                item!.imageURL.toString(),
+              ),
+            ),
+          ),
+          width: context.width * 0.7,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  item!.title.toString(),
+                  style: context.textTheme.bodyText1!.copyWith(fontSize: 15),
+                  maxLines: 2,
+                ),
+              ),
+              const Icon(
+                Icons.arrow_forward_ios,
+                color: Colors.black,
+              )
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
