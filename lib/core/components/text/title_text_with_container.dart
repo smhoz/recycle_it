@@ -3,7 +3,7 @@ import '../../extensions/context_extension.dart';
 
 class TitleTextWithContainer extends StatelessWidget {
   final String text;
-  final Widget child;
+  final Widget? child;
   final EdgeInsets? padding;
   final TextStyle? style;
   final CrossAxisAlignment? crossAxisAlignment;
@@ -12,7 +12,7 @@ class TitleTextWithContainer extends StatelessWidget {
   const TitleTextWithContainer(
       {Key? key,
       required this.text,
-      required this.child,
+      this.child,
       this.padding,
       this.style,
       this.crossAxisAlignment,
@@ -32,7 +32,7 @@ class TitleTextWithContainer extends StatelessWidget {
             style: style ?? context.textTheme.bodyText1,
           ),
         ),
-        child,
+        child ?? const SizedBox(),
       ],
     );
   }
