@@ -18,16 +18,22 @@ class HomePage extends StatelessWidget {
               children: BottomBarItems.instance.pages,
               index: viewModel.currentIndex,
             ),
-            bottomNavigationBar: SafeArea(
-                child: Padding(
-              padding: context.paddingMedium,
-              child: _bottomNavigationBar(viewModel, context),
-            )));
+            bottomNavigationBar: AnimatedContainer(
+              duration: context.normalDuration,
+              height: context.read<HomeViewModel>().isShowModalBottomSheet
+                  ? 0
+                  : null,
+              child: SafeArea(
+                  child: Padding(
+                padding: context.paddingMedium,
+                child: _bottomNavigationBar(viewModel, context),
+              )),
+            ));
       },
     );
   }
 
-  GNav _bottomNavigationBar(HomeViewModel viewModel, BuildContext context) {
+  Widget _bottomNavigationBar(HomeViewModel viewModel, BuildContext context) {
     return GNav(
       selectedIndex: viewModel.currentIndex,
       tabs: BottomBarItems.instance.items,
