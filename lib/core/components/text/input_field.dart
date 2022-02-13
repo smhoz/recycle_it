@@ -4,7 +4,7 @@ import '../../extensions/context_extension.dart';
 
 class InputField extends StatelessWidget {
   final String? title;
-  final Icon? icon;
+  final Widget? icon;
   final bool? isPassword;
   final TextInputType? textInputType;
   final String? prefix;
@@ -13,23 +13,28 @@ class InputField extends StatelessWidget {
   final EdgeInsets? padding;
   final Function(String)? validator;
   final int? maxLength;
-  TextEditingController? controller;
+  final TextEditingController? controller;
   final Function(String)? onChanged;
   final bool? readOnly;
-
+  final Widget? suffix;
+  final TextAlign? textAlign;
+  final TextStyle? textStyle;
   InputField({
     Key? key,
     this.title,
     this.icon,
+    this.textAlign,
+    this.suffix,
+    this.textStyle,
     this.isPassword = false,
     this.textInputType = TextInputType.text,
     this.prefix = "",
     this.helperText,
+    this.controller,
     this.borderRadius = 64,
-    this.padding = const EdgeInsets.symmetric(vertical: 8, horizontal: 32),
+    this.padding = const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
     this.validator,
     this.maxLength,
-    this.controller,
     this.onChanged,
     this.readOnly,
   }) : super(key: key);
@@ -38,7 +43,6 @@ class InputField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    controller ??= TextEditingController();
     var border = OutlineInputBorder(
       borderRadius: BorderRadius.all(
         Radius.circular(borderRadius!),
@@ -51,7 +55,6 @@ class InputField extends StatelessWidget {
         children: [
           Container(
             height: 60,
-            width: context.width,
             decoration: _boxDecoration(),
           ),
           Form(
@@ -68,6 +71,8 @@ class InputField extends StatelessWidget {
   TextFormField _textFormField(
       BuildContext context, OutlineInputBorder border) {
     return TextFormField(
+      style: textStyle,
+      textAlign: textAlign ?? TextAlign.start,
       onChanged: onChanged,
       maxLength: maxLength,
       readOnly: readOnly ?? false,
@@ -86,6 +91,7 @@ class InputField extends StatelessWidget {
       labelText: title,
       prefixIcon: icon,
       helperText: helperText,
+      suffixIcon: suffix,
       prefixText: prefix,
       filled: true,
       fillColor: context.theme.cardColor,
