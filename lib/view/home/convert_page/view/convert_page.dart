@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:hackathon_app/core/commons/_print_message.dart';
 import 'package:hackathon_app/core/extensions/context_extension.dart';
 import 'package:hackathon_app/core/model/conversion_model.dart';
 import 'package:hackathon_app/view/home/convert_page/viewmodel/convert_page_viewmodel.dart';
@@ -19,7 +21,6 @@ class ConvertPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    context.read<ConvertPageViewModel>().getItems(id);
     return Scaffold(
       body: Column(
         children: [
@@ -38,7 +39,7 @@ class ConvertPage extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 30.0),
             child: Text(
-              "You have saved \n0.33 m2 of Forest!",
+              "Yaptığınız geri dönüşümle \n2 ağacın kesilmesini önlediniz!",
               style: context.textTheme.headline1,
             ),
           ),
@@ -65,7 +66,7 @@ class ConvertPage extends StatelessWidget {
             ),
           ),
           CustomAnimationRoundedButton(
-            title: 'Convert',
+            title: 'DÖNÜŞTÜR',
             onTap: () async {
               final _userDBService = UserService();
 
@@ -82,6 +83,11 @@ class ConvertPage extends StatelessWidget {
               await _userDBService.updateBalance(
                   uid: user?.uid ?? "", balance: result.toString());
               getIt<ProfileBloc>().add(GetProfileUpdatedValues());
+
+              Navigator.pop(context);
+              PrintMessage.showSucces(context,
+                  message:
+                      "Dönüştürme başarılı. Bakiyenizi cüzdandan kontrol edebilirsiniz.");
             },
           ),
         ],

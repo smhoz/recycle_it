@@ -8,10 +8,13 @@ class ConvertPageService {
 
   FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
 
-  Future<dynamic> getItems(String? id) async {
+  Future<dynamic> getItems() async {
     try {
       DocumentSnapshot<Map<String, dynamic>> querySnapshot =
-          await firebaseFirestore.collection("Conversions").doc(id!).get();
+          await firebaseFirestore
+              .collection("Conversions")
+              .doc("prpPm0VdMol9yS6VPFAm")
+              .get();
       Conversion _conversion = Conversion.fromMap(querySnapshot.data()!);
       return _conversion;
     } on FirebaseException catch (error) {

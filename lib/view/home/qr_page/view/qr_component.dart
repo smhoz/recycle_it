@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hackathon_app/core/extensions/context_extension.dart';
 import 'package:hackathon_app/view/home/convert_page/view/convert_page.dart';
+import 'package:hackathon_app/view/home/convert_page/viewmodel/convert_page_viewmodel.dart';
+import 'package:provider/provider.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
 class QRPage extends StatefulWidget {

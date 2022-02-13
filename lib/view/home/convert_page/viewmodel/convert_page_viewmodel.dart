@@ -14,11 +14,13 @@ class ConvertPageViewModel extends ChangeNotifier with MessageNotifierMixin {
 
   late final Conversion conversions;
 
-  ConvertPageViewModel() {}
+  ConvertPageViewModel() {
+    getItems();
+  }
 
-  void getItems(String? id) async {
+  void getItems() async {
     changeConvertState(ConvertState.loading);
-    final response = await ConvertPageService.instance.getItems(id!);
+    final response = await ConvertPageService.instance.getItems();
     print(response);
     if (response is Conversion) {
       conversions = response;
