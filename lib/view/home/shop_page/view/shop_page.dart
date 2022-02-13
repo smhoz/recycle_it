@@ -151,7 +151,7 @@ class ItemCard extends StatelessWidget {
             context.showBottomSheet(child: BuyItemBottomSheet(item: item)),
         child: Container(
           alignment: Alignment.bottomLeft,
-          margin: const EdgeInsets.all(8.0),
+          margin: context.paddingLow,
           decoration: BoxDecoration(
             borderRadius: CustomBorderRadius.normalCircular(),
             image: DecorationImage(
@@ -165,7 +165,7 @@ class ItemCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: context.paddingLow,
                 child: Text(
                   item!.title.toString(),
                   style: context.textTheme.bodyText1!.copyWith(fontSize: 15),
