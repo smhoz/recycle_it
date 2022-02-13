@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hackathon_app/core/components/appbar/transparent_app_bar.dart';
+import 'package:hackathon_app/core/components/button/custom_rounded_button.dart';
+import 'package:hackathon_app/core/components/text/input_field.dart';
+import 'package:hackathon_app/core/components/text/title_text_with_container.dart';
+import 'package:hackathon_app/core/extensions/context_extension.dart';
 import '../../../../core/utils/locator_get_it.dart';
 import 'wallet_form.dart';
 
@@ -11,88 +16,60 @@ class WalletPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _cubit = getIt<BalanceCubit>();
-
     return Scaffold(
-      appBar: AppBar(
-        toolbarHeight: 80.0,
-        backgroundColor: Colors.orange[400],
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-        title: const Center(
-          child: Text("Payment"),
-        ),
-      ),
+      resizeToAvoidBottomInset: false,
+      appBar: const TransparentAppBar(),
       body: BlocProvider(
         create: (context) => _cubit,
-        child: ListView(
-          children: [
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                _IconButton(
-                    iconName: Icons.remove,
-                    changeValue: _cubit.balanceDecrement),
-                const _BalanceInput(),
-                _IconButton(
-                    iconName: Icons.add, changeValue: _cubit.balanceIncrement),
-              ],
-            ),
-            const SizedBox(
-              height: 50,
-            ),
-            const Text(
-              "Card Info",
-            ),
-            const WalletForm(),
-            ElevatedButton(
-                onPressed: () {
-                  WalletAlertDialog.showMyDialog(context);
-                },
-                child: const Text('Submit'))
-          ],
+        child: SafeArea(
+          child: _scaffoldBody(context, _cubit),
         ),
       ),
     );
   }
-}
 
-class _IconButton extends StatelessWidget {
-  final IconData iconName;
-  const _IconButton({
-    Key? key,
-    required Function this.changeValue,
-    required this.iconName,
-  }) : super(key: key);
-  final Function changeValue;
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.grey,
-        borderRadius: BorderRadius.circular(30.0),
-      ),
-      child: IconButton(
-        color: Colors.white,
-        iconSize: 32,
-        onPressed: () => changeValue(),
-        icon: Icon(iconName),
-      ),
+  Column _scaffoldBody(BuildContext context, BalanceCubit _cubit) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        const TitleTextWithContainer(
+          text: "Kart Bilgileri",
+          child: WalletForm(),
+        ),
+        _incrementAndDecrementButton(context, _cubit),
+        _submitButton(context)
+      ],
     );
   }
-}
 
-class _BalanceInput extends StatelessWidget {
-  const _BalanceInput({Key? key}) : super(key: key);
+  CustomRoundedButton _submitButton(BuildContext context) {
+    return CustomRoundedButton(
+        onTap: () {
+          WalletAlertDialog.showMyDialog(context);
+        },
+        title: "Onayla");
+  }
 
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [],
+  InputField _incrementAndDecrementButton(
+      BuildContext context, BalanceCubit _cubit) {
+    return InputField(
+      textStyle: context.textTheme.bodyText1,
+      textAlign: TextAlign.center,
+      controller: _cubit.balanceController,
+      textInputType: TextInputType.number,
+      suffix: _incrementButton(_cubit),
+      icon: _decrementButton(_cubit),
     );
+  }
+
+  IconButton _decrementButton(BalanceCubit _cubit) {
+    return IconButton(
+        onPressed: _cubit.balanceDecrement, icon: const Icon(Icons.remove));
+  }
+
+  IconButton _incrementButton(BalanceCubit _cubit) {
+    return IconButton(
+        onPressed: _cubit.balanceIncrement, icon: const Icon(Icons.add));
   }
 }
