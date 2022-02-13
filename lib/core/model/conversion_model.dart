@@ -1,26 +1,20 @@
 import 'dart:convert';
 
-import 'package:hackathon_app/core/model/container_model.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:hackathon_app/core/model/recyclable_model.dart';
 
 class Conversion {
-  RecycleContainer? container;
   RecyclableType? type;
   double? weight;
   double? convertedMoneyAmount;
   DateTime? conversionTime;
 
   Conversion(
-      {this.container,
-      this.type,
-      this.weight,
-      this.convertedMoneyAmount,
-      this.conversionTime});
+      {this.type, this.weight, this.convertedMoneyAmount, this.conversionTime});
 
   Map<String, dynamic> toMap() {
     return {
-      'container': container,
-      'type': type,
+      'type': type.toString(),
       'weight': weight,
       'convertedMoneyAmount': convertedMoneyAmount,
       'conversionTime': conversionTime,
@@ -29,11 +23,10 @@ class Conversion {
 
   factory Conversion.fromMap(Map<String, dynamic> map) {
     return Conversion(
-      container: map['container'],
-      type: map['type'],
-      weight: map['weight'],
-      convertedMoneyAmount: map['convertedMoneyAmount'],
-      conversionTime: map['conversionTime'],
+      type: Recyclable.fromString(map['type']),
+      weight: map['weight'] as double,
+      convertedMoneyAmount: map['convertedMoneyAmount'] as double,
+      conversionTime: (map["conversionTime"] as Timestamp).toDate(),
     );
   }
 

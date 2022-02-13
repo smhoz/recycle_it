@@ -1,3 +1,4 @@
+import 'package:hackathon_app/view/home/convert_page/viewmodel/convert_page_viewmodel.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
 
@@ -15,6 +16,9 @@ class ProviderList {
     ),
     ChangeNotifierProvider<ShopViewModel>(
       create: (context) => ShopViewModel(),
+    ),
+    ChangeNotifierProvider<ConvertPageViewModel>(
+      create: (context) => ConvertPageViewModel(),
     )
   ];
 }
