@@ -48,7 +48,7 @@ class BuyItemBottomSheet extends StatelessWidget {
     double _newBalance = double.parse(_user?.balance ?? "0.0") - item!.price!;
 
     if (_newBalance < 0.0) {
-      return false;
+      return Future.value(false);
     } else {
       bool _result = await _userDBService.updateBalance(
         uid: _user?.uid ?? "",
@@ -79,7 +79,6 @@ class BuyItemBottomSheet extends StatelessWidget {
     return CustomRoundedButton(
       title: "SATIN AL",
       onTap: () {
-        Navigator.pop(context);
         balanceUpdate().then((value) {
           if (value) {
             PrintMessage.showSucces(context,
@@ -90,6 +89,7 @@ class BuyItemBottomSheet extends StatelessWidget {
                 message:
                     "Satın alım başarısız! Cüzdanınızda yeterli bakiye olduğundan emin olun.");
           }
+          Navigator.pop(context);
         });
       },
     );

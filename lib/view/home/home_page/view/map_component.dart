@@ -47,19 +47,10 @@ class MapComponent extends StatelessWidget {
   Padding _homeTitle(BuildContext context) {
     return Padding(
       padding: context.homesymetricPadding,
-      child: InkWell(
-        onTap: () {
-          Navigator.push(context, MaterialPageRoute(
-            builder: (context) {
-              return ConvertPage();
-            },
-          ));
-        },
-        child: Text(
-          "Anasayfa",
-          style: context.textTheme.bodyText1!
-              .copyWith(fontSize: 28, fontWeight: FontWeight.w500),
-        ),
+      child: Text(
+        "Anasayfa",
+        style: context.textTheme.bodyText1!
+            .copyWith(fontSize: 28, fontWeight: FontWeight.w500),
       ),
     );
   }

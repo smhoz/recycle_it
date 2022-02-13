@@ -53,7 +53,7 @@ class _QRPageState extends State<QRPage> {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => ConvertPage(id: result!.code!),
+            builder: (context) => const ConvertPage(),
           ),
         );
       });
