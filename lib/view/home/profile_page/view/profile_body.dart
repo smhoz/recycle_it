@@ -51,6 +51,9 @@ class _WalletContainer extends StatelessWidget {
       margin: context.paddingLow,
       height: context.height * 0.10,
       child: ListTile(
+        onTap: (() {
+          context.router.pushNamed(RouteConsts.WALLET_PAGE);
+        }),
         leading: _navigateWalletIcon(),
         title: Text(
           "Cüzdanım",
@@ -74,15 +77,11 @@ class _WalletContainer extends StatelessWidget {
     );
   }
 
-  IconButton _navigateIcon(BuildContext context) {
-    return IconButton(
-        onPressed: (() {
-          context.router.pushNamed(RouteConsts.WALLET_PAGE);
-        }),
-        icon: const Icon(
-          Icons.arrow_forward_ios,
-          size: 24,
-        ));
+  Icon _navigateIcon(BuildContext context) {
+    return const Icon(
+      Icons.arrow_forward_ios,
+      size: 24,
+    );
   }
 
   Row _balanceRow(BuildContext context) {
