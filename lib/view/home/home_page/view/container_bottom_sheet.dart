@@ -11,8 +11,8 @@ class ContainerBottomSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomBottomSheet(
-      initialSize: 0.3,
-      maxSize: 0.4,
+      initialSize: 0.4,
+      maxSize: 0.5,
       child: Padding(
         padding: context.paddingLow,
         child: Column(
@@ -21,12 +21,12 @@ class ContainerBottomSheet extends StatelessWidget {
             _containerName(context),
             Padding(
               padding: context.paddingLow,
-              child: _assistConversiton(context),
+              child: _supportedConversionsText(context),
             ),
             Padding(
               padding: context.paddingLow,
               child: SizedBox(
-                height: context.height * 0.12,
+                height: context.height * 0.14,
                 child: _recyclablesListView(),
               ),
             ),
@@ -54,7 +54,7 @@ class ContainerBottomSheet extends StatelessWidget {
     );
   }
 
-  Text _assistConversiton(BuildContext context) {
+  Text _supportedConversionsText(BuildContext context) {
     return Text(
       "Desteklenen Dönüşümler:",
       style: context.textTheme.bodyLarge,
