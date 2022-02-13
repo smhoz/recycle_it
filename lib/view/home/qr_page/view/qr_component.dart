@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hackathon_app/core/extensions/context_extension.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
 class QRPage extends StatefulWidget {
@@ -23,13 +24,19 @@ class _QRPageState extends State<QRPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Scan")),
-      body: QRView(
-        key: qrKey,
-        overlay: QrScannerOverlayShape(),
-        onQRViewCreated: _onQRViewCreated,
-        formatsAllowed: const [BarcodeFormat.qrcode],
+      backgroundColor: context.themeColor.primary,
+      body: SafeArea(
+        child: _QRBody(),
       ),
+    );
+  }
+
+  QRView _QRBody() {
+    return QRView(
+      key: qrKey,
+      overlay: QrScannerOverlayShape(),
+      onQRViewCreated: _onQRViewCreated,
+      formatsAllowed: const [BarcodeFormat.qrcode],
     );
   }
 
