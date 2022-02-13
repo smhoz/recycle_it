@@ -130,13 +130,7 @@ class ShopPage extends StatelessWidget {
       scrollDirection: Axis.horizontal,
       itemCount: items.length,
       itemBuilder: (context, index) {
-        return ListView.builder(
-          scrollDirection: Axis.horizontal,
-          itemCount: items.length,
-          itemBuilder: (context, index) {
-            return ItemCard(item: items[index]);
-          },
-        );
+        return ItemCard(item: items[index]);
       },
     );
   }
