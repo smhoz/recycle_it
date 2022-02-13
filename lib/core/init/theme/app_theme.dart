@@ -26,6 +26,10 @@ class AppTheme {
         fontSize: 20.0,
         fontWeight: FontWeight.w700,
       ),
+      headline2: TextStyle(
+        fontSize: 25.0,
+        fontWeight: FontWeight.w700,
+      ),
       bodyText1: TextStyle(
         fontSize: 20.0,
         fontWeight: FontWeight.bold,
