@@ -35,7 +35,7 @@ class BalanceCubit extends Cubit<BalanceState> {
   Future<bool> balanceUpdate() async {
     final _userDBService = UserService();
     final _user = getIt<GlobalRepository>().user;
-    int _newBalance = balanceValue + int.parse(_user?.balance ?? "");
+    double _newBalance = balanceValue + double.parse(_user?.balance ?? "");
     bool _result = await _userDBService.updateBalance(
       uid: _user?.uid ?? "",
       balance: _newBalance.toString(),
