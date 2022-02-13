@@ -65,7 +65,7 @@ class ShopPage extends StatelessWidget {
           child: _shopLists(viewModel),
         ),
         TitleTextWithContainer(
-          text: "Populer",
+          text: "Popüler",
           child: SizedBox(
               height: context.height * 0.18, child: _shopLists(viewModel)),
         )

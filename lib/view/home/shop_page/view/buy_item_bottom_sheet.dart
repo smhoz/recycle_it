@@ -69,7 +69,7 @@ class BuyItemBottomSheet extends StatelessWidget {
 
   Text _supportedConversionsText(BuildContext context) {
     return Text(
-      "Desteklenen Dönüşümler:",
+      "Açıklama:",
       style: context.textTheme.bodyLarge,
       textAlign: TextAlign.start,
     );
