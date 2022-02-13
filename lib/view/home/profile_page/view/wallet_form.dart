@@ -1,56 +1,43 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../../../../core/extensions/context_extension.dart';
-import '../../../../core/utils/locator_get_it.dart';
-
-import '../../../../core/commons/_custom_text_field.dart';
-import '../viewmodel/cubit/balance_cubit.dart';
+import 'package:hackathon_app/core/components/text/input_field.dart';
 
 class WalletForm extends StatelessWidget {
   const WalletForm({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final _cubit = getIt<BalanceCubit>();
-    return SizedBox(
-      width: context.width,
-      height: context.height * 0.4,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          CustomTextFormField(
-              controller: _cubit.cardNumberController,
-              labelText: 'Card number'),
-          Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              CustomTextFormField(
-                controller: _cubit.expireDateController,
-                labelText: 'Expired date',
-              ),
-              const VerticalDivider(),
-              CustomTextFormField(
-                  controller: _cubit.cvvController, labelText: 'CVV'),
-            ],
-          ),
-          CustomTextFormField(
-            controller: _cubit.cardHoldersNameController,
-            labelText: 'Cardholder\'s name',
-          ),
-          const _Switch(),
-        ],
-      ),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        InputField(
+          title: "Ad Soyad",
+        ),
+        InputField(
+          title: "Kart Numarası",
+        ),
+        InputField(
+          textInputType: TextInputType.number,
+          title: "Son Kullanım Tarihi",
+        ),
+        InputField(
+          title: "CVV",
+          textInputType: TextInputType.number,
+        ),
+        const _RemeberMyCardSwitch(),
+      ],
     );
   }
 }
 
-class _Switch extends StatefulWidget {
-  const _Switch({Key? key}) : super(key: key);
+class _RemeberMyCardSwitch extends StatefulWidget {
+  const _RemeberMyCardSwitch({Key? key}) : super(key: key);
 
   @override
-  _SwitchState createState() => _SwitchState();
+  _RemeberMyCardSwitchState createState() => _RemeberMyCardSwitchState();
 }
 
-class _SwitchState extends State<_Switch> {
+class _RemeberMyCardSwitchState extends State<_RemeberMyCardSwitch> {
   bool _switchState = false;
 
   @override
@@ -62,9 +49,7 @@ class _SwitchState extends State<_Switch> {
         Row(
           children: const [
             VerticalDivider(),
-            Text(
-              "Remember my card.",
-            ),
+            Text("Kartımı hatırla"),
           ],
         ),
         themeSwitch(),
@@ -73,12 +58,15 @@ class _SwitchState extends State<_Switch> {
   }
 
   Widget themeSwitch() {
-    return Switch(
-        value: _switchState,
-        onChanged: (value) {
-          setState(() {
-            _switchState = value;
-          });
-        });
+    return Transform.scale(
+      scale: 0.7,
+      child: CupertinoSwitch(
+          value: _switchState,
+          onChanged: (value) {
+            setState(() {
+              _switchState = value;
+            });
+          }),
+    );
   }
 }
