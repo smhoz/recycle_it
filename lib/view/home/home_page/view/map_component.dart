@@ -3,11 +3,11 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:hackathon_app/core/components/button/custom_rounded_button.dart';
-import 'package:hackathon_app/core/components/text/title_text_with_container.dart';
 import 'package:hackathon_app/core/extensions/context_extension.dart';
 import 'package:hackathon_app/core/model/container_model.dart';
 import 'package:hackathon_app/core/model/recyclable_model.dart';
 import 'package:hackathon_app/core/utils/border/custom_border_radius.dart';
+import 'package:hackathon_app/view/home/convert_page/view/convert_page.dart';
 import 'package:hackathon_app/view/home/home_page/view/container_bottom_sheet.dart';
 import 'package:hackathon_app/view/home/home_page/viewmodel/home_view_model.dart';
 import 'package:hackathon_app/view/home/qr_page/view/qr_component.dart';
@@ -26,13 +26,17 @@ class MapComponent extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               _homeTitle(context),
-              Expanded(
-                child: MapWidget(
-                  containers: [
-                    _fakeRecyleContainer1(),
-                    _fakeRecycleContainer2(),
-                  ],
-                ),
+              Consumer<HomeViewModel>(
+                builder: (context, viewModel, child) {
+                  if (viewModel.homeViewState == HomeViewState.complete) {
+                    return Expanded(
+                      child: MapWidget(
+                        containers: viewModel.recycleContainers,
+                      ),
+                    );
+                  }
+                  return Container();
+                },
               ),
               _scanButton(context),
             ]),
@@ -43,10 +47,19 @@ class MapComponent extends StatelessWidget {
   Padding _homeTitle(BuildContext context) {
     return Padding(
       padding: context.homesymetricPadding,
-      child: Text(
-        "Anasayfa",
-        style: context.textTheme.bodyText1!
-            .copyWith(fontSize: 28, fontWeight: FontWeight.w500),
+      child: InkWell(
+        onTap: () {
+          Navigator.push(context, MaterialPageRoute(
+            builder: (context) {
+              return ConvertPage();
+            },
+          ));
+        },
+        child: Text(
+          "Anasayfa",
+          style: context.textTheme.bodyText1!
+              .copyWith(fontSize: 28, fontWeight: FontWeight.w500),
+        ),
       ),
     );
   }
@@ -66,51 +79,6 @@ class MapComponent extends StatelessWidget {
           ),
         ),
       ),
-    );
-  }
-
-  RecycleContainer _fakeRecycleContainer2() {
-    return RecycleContainer(
-      name: "Container 2",
-      address: "Gültepe Mah., Blabla Sokak, No: 13, Kadıköy/İstanbul",
-      location: const LatLng(41.0285005, 28.7589907),
-      recyclables: [
-        Recyclable(
-          type: RecyclableType.battery,
-          currentLoad: 24,
-          maxLoad: 60,
-        ),
-      ],
-    );
-  }
-
-  RecycleContainer _fakeRecyleContainer1() {
-    return RecycleContainer(
-      name: "Container 1",
-      address: "Çankaya Mh., Veli Bacık Cd., No: 9/3, Küçükçekmece/İstanbul",
-      location: const LatLng(41.0255005, 28.7319907),
-      recyclables: [
-        Recyclable(
-          type: RecyclableType.paper,
-          currentLoad: 24,
-          maxLoad: 60,
-        ),
-        Recyclable(
-          type: RecyclableType.plastic,
-          currentLoad: 46,
-          maxLoad: 72,
-        ),
-        Recyclable(
-          type: RecyclableType.oil,
-          currentLoad: 12,
-          maxLoad: 50,
-        ),
-        Recyclable(
-          type: RecyclableType.glass,
-          currentLoad: 8,
-          maxLoad: 36,
-        ),
-      ],
     );
   }
 }
@@ -181,6 +149,7 @@ class _MapWidgetState extends State<MapWidget> {
         infoWindow: InfoWindow(title: widget.containers![containerIndex].name!),
         onTap: () {
           context.read<HomeViewModel>().changeIsShowModalBottomSheet(true);
+          print(widget.containers![containerIndex].toString());
           context.showBottomSheet(
             child: ContainerBottomSheet(
               container: widget.containers![containerIndex],

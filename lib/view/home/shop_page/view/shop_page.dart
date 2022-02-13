@@ -143,6 +143,7 @@ class ItemCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+        
       shape: RoundedRectangleBorder(
           borderRadius: CustomBorderRadius.normalCircular()),
       margin: context.paddingMedium,

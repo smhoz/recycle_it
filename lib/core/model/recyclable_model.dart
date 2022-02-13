@@ -27,9 +27,9 @@ class Recyclable {
 
   factory Recyclable.fromMap(Map<String, dynamic> map) {
     return Recyclable(
-      type: map['type'],
-      currentLoad: map['currentLoad'],
-      maxLoad: map['maxLoad'],
+      type: Recyclable.fromString(map['type']),
+      currentLoad: map['currentLoad'] as double?,
+      maxLoad: map['maxLoad'] as double?,
     );
   }
 

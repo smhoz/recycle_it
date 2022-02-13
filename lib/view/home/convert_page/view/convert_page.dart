@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:hackathon_app/core/extensions/context_extension.dart';
 import 'package:hackathon_app/view/home/convert_page/viewmodel/convert_page_viewmodel.dart';
+import 'package:hackathon_app/view/home/home_page/service/home_service.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../core/components/button/custom_animation_button.dart';
-import '../../../../core/components/button/custom_rounded_button.dart';
 import '../../../../core/components/center/center_circular_indicator.dart';
 import '../../../../core/components/center/center_error.dart';
 import '../../../../core/network/user_service.dart';
@@ -63,7 +63,10 @@ class ConvertPage extends StatelessWidget {
           ),
           CustomAnimationRoundedButton(
             title: 'Convert',
-            onTap: () async {
+            onTap: () async { 
+
+              
+
               final _userDBService = UserService();
 
               final _balance = context
