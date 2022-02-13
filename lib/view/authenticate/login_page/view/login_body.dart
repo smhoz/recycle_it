@@ -88,6 +88,7 @@ class _SignInButton extends StatelessWidget {
     return BlocBuilder<LoginCubit, LoginState>(
       buildWhen: (previous, current) => previous != current,
       builder: (context, state) {
+        
         if (state is LoginLoading) {
           return const Center(child: CircularProgressIndicator());
         } else {
