@@ -3,12 +3,15 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:hackathon_app/core/components/button/custom_rounded_button.dart';
+import 'package:hackathon_app/core/components/text/title_text_with_container.dart';
 import 'package:hackathon_app/core/extensions/context_extension.dart';
 import 'package:hackathon_app/core/model/container_model.dart';
 import 'package:hackathon_app/core/model/recyclable_model.dart';
 import 'package:hackathon_app/core/utils/border/custom_border_radius.dart';
 import 'package:hackathon_app/view/home/home_page/view/container_bottom_sheet.dart';
+import 'package:hackathon_app/view/home/home_page/viewmodel/home_view_model.dart';
 import 'package:hackathon_app/view/home/qr_page/view/qr_component.dart';
+import 'package:provider/provider.dart';
 
 class MapComponent extends StatelessWidget {
   const MapComponent({Key? key}) : super(key: key);
@@ -18,16 +21,32 @@ class MapComponent extends StatelessWidget {
     return SafeArea(
       child: Padding(
         padding: context.paddingLow,
-        child:
-            Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-          MapWidget(
-            containers: [
-              _fakeRecyleContainer1(),
-              _fakeRecycleContainer2(),
-            ],
-          ),
-          _scanButton(context),
-        ]),
+        child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              _homeTitle(context),
+              Expanded(
+                child: MapWidget(
+                  containers: [
+                    _fakeRecyleContainer1(),
+                    _fakeRecycleContainer2(),
+                  ],
+                ),
+              ),
+              _scanButton(context),
+            ]),
+      ),
+    );
+  }
+
+  Padding _homeTitle(BuildContext context) {
+    return Padding(
+      padding: context.homesymetricPadding,
+      child: Text(
+        "Anasayfa",
+        style: context.textTheme.bodyText1!
+            .copyWith(fontSize: 28, fontWeight: FontWeight.w500),
       ),
     );
   }
@@ -113,17 +132,19 @@ class _MapWidgetState extends State<MapWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: context.paddingVeryLow,
-      child: Material(
-        elevation: 3.0,
-        borderRadius: CustomBorderRadius.normalCircular(),
-        child: Container(
-          height: context.height * 0.65,
-          decoration: _boxDecoration(context),
-          child: ClipRRect(
-            borderRadius: CustomBorderRadius.normalCircular(),
-            child: _googleMap(context),
+    return Center(
+      child: Padding(
+        padding: context.paddingVeryLow,
+        child: Material(
+          elevation: 3.0,
+          borderRadius: CustomBorderRadius.normalCircular(),
+          child: Container(
+            height: context.height * 0.65,
+            decoration: _boxDecoration(context),
+            child: ClipRRect(
+              borderRadius: CustomBorderRadius.normalCircular(),
+              child: _googleMap(context),
+            ),
           ),
         ),
       ),
@@ -159,6 +180,7 @@ class _MapWidgetState extends State<MapWidget> {
         position: widget.containers![containerIndex].location!,
         infoWindow: InfoWindow(title: widget.containers![containerIndex].name!),
         onTap: () {
+          context.read<HomeViewModel>().changeIsShowModalBottomSheet(true);
           context.showBottomSheet(
             child: ContainerBottomSheet(
               container: widget.containers![containerIndex],
