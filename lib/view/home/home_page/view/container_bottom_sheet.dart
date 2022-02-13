@@ -14,54 +14,74 @@ class ContainerBottomSheet extends StatelessWidget {
       initialSize: 0.3,
       maxSize: 0.4,
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: context.paddingLow,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            ListTile(
-              leading: const Icon(Icons.delete, size: 48),
-              title: Text(
-                container!.name!,
-                style: context.textTheme.headline1,
-              ),
+            _containerName(context),
+            Padding(
+              padding: context.paddingLow,
+              child: _assistConversiton(context),
             ),
             Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                "Desteklenen Dönüşümler:",
-                style: context.textTheme.bodyLarge,
-                textAlign: TextAlign.start,
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8.0),
+              padding: context.paddingLow,
               child: SizedBox(
-                height: 42,
-                child: ListView(
-                  shrinkWrap: true,
-                  scrollDirection: Axis.horizontal,
-                  children: List.generate(
-                    container!.recyclables!.length,
-                    (recyclableIndex) => RecyclableProgressBar(
-                      recyclable: container!.recyclables![recyclableIndex],
-                    ),
-                  ),
-                ),
+                height: context.height * 0.12,
+                child: _recyclablesListView(),
               ),
             ),
-            ListTile(
-              leading: const Icon(Icons.location_pin, size: 32),
-              title: Text(
-                container!.address!,
-                style: context.textTheme.bodyMedium,
-              ),
-              trailing: IconButton(
-                icon: const Icon(Icons.directions),
-                onPressed: () {},
-              ),
-            ),
+            _addresListTile(context),
           ],
         ),
+      ),
+    );
+  }
+
+  ListView _recyclablesListView() {
+    return ListView(
+      shrinkWrap: true,
+      scrollDirection: Axis.horizontal,
+      children: _recyclables(),
+    );
+  }
+
+  List<Widget> _recyclables() {
+    return List.generate(
+      container!.recyclables!.length,
+      (recyclableIndex) => RecyclableProgressBar(
+        recyclable: container!.recyclables![recyclableIndex],
+      ),
+    );
+  }
+
+  Text _assistConversiton(BuildContext context) {
+    return Text(
+      "Desteklenen Dönüşümler:",
+      style: context.textTheme.bodyLarge,
+      textAlign: TextAlign.start,
+    );
+  }
+
+  ListTile _addresListTile(BuildContext context) {
+    return ListTile(
+      leading: const Icon(Icons.location_pin, size: 32),
+      title: Text(
+        container!.address!,
+        style: context.textTheme.bodyMedium,
+      ),
+      trailing: IconButton(
+        icon: const Icon(Icons.directions),
+        onPressed: () {},
+      ),
+    );
+  }
+
+  ListTile _containerName(BuildContext context) {
+    return ListTile(
+      leading: const Icon(Icons.delete, size: 48),
+      title: Text(
+        container!.name!,
+        style: context.textTheme.headline1,
       ),
     );
   }
