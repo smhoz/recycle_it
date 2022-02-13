@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:hackathon_app/core/components/center/center_circular_indicator.dart';
-import 'package:hackathon_app/core/components/center/center_error.dart';
-import 'package:hackathon_app/core/extensions/context_extension.dart';
-import 'package:hackathon_app/core/init/theme/color/custom_colors.dart';
-import 'package:hackathon_app/core/utils/border/custom_border_radius.dart';
+import '../../../../core/components/center/center_circular_indicator.dart';
+import '../../../../core/components/center/center_error.dart';
+import '../../../../core/extensions/context_extension.dart';
+import '../../../../core/init/theme/color/custom_colors.dart';
+import '../../../../core/utils/border/custom_border_radius.dart';
 
 import 'package:provider/provider.dart';
 

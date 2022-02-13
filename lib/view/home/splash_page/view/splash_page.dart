@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hackathon_app/view/home/splash_page/view/splash_body.dart';
+import 'splash_body.dart';
 
 import '../viewmodel/cubit/splash_cubit.dart';
 

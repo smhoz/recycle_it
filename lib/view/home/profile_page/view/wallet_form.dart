@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hackathon_app/core/extensions/context_extension.dart';
-import 'package:hackathon_app/core/utils/locator_get_it.dart';
+import '../../../../core/extensions/context_extension.dart';
+import '../../../../core/utils/locator_get_it.dart';
 
 import '../../../../core/commons/_custom_text_field.dart';
 import '../viewmodel/cubit/balance_cubit.dart';

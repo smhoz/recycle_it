@@ -1,9 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hackathon_app/core/extensions/context_extension.dart';
-import 'package:hackathon_app/core/components/button/custom_rounded_button.dart';
-import 'package:hackathon_app/core/components/text/input_field.dart';
+import '../../../../core/extensions/context_extension.dart';
+import '../../../../core/components/button/custom_rounded_button.dart';
+import '../../../../core/components/text/input_field.dart';
 
 import '../../../../core/commons/_print_message.dart';
 import '../../../../core/commons/_validators.dart';

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:hackathon_app/core/extensions/context_extension.dart';
+import '../../extensions/context_extension.dart';
 
 class InputField extends StatelessWidget {
   final String? title;
@@ -15,7 +15,7 @@ class InputField extends StatelessWidget {
   final int? maxLength;
   TextEditingController? controller;
   final Function(String)? onChanged;
-  
+  final bool? readOnly;
 
   InputField({
     Key? key,
@@ -25,12 +25,13 @@ class InputField extends StatelessWidget {
     this.textInputType = TextInputType.text,
     this.prefix = "",
     this.helperText,
-    this.onChanged,
     this.borderRadius = 64,
     this.padding = const EdgeInsets.symmetric(vertical: 8, horizontal: 32),
     this.validator,
     this.maxLength,
     this.controller,
+    this.onChanged,
+    this.readOnly,
   }) : super(key: key);
 
   final formKey = GlobalKey<FormState>();
@@ -69,6 +70,7 @@ class InputField extends StatelessWidget {
     return TextFormField(
       onChanged: onChanged,
       maxLength: maxLength,
+      readOnly: readOnly ?? false,
       controller: controller,
       obscureText: isPassword!,
       keyboardType: textInputType,

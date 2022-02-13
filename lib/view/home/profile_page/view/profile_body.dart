@@ -1,13 +1,13 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hackathon_app/core/consts/navigation_const.dart';
-import 'package:hackathon_app/core/extensions/context_extension.dart';
-import 'package:hackathon_app/core/init/theme/color/custom_colors.dart';
-import 'package:hackathon_app/core/navigation/navigation_manager.gr.dart';
-import 'package:hackathon_app/core/repository/auth_repository.dart';
-import 'package:hackathon_app/core/repository/global_repositor.dart';
-import 'package:hackathon_app/core/utils/border/custom_border_radius.dart';
+import '../../../../core/consts/navigation_const.dart';
+import '../../../../core/extensions/context_extension.dart';
+import '../../../../core/init/theme/color/custom_colors.dart';
+import '../../../../core/navigation/navigation_manager.gr.dart';
+import '../../../../core/repository/auth_repository.dart';
+import '../../../../core/repository/global_repositor.dart';
+import '../../../../core/utils/border/custom_border_radius.dart';
 
 import '../../../../../../core/utils/locator_get_it.dart';
 import '../viewmodel/bloc/profile_bloc.dart';
@@ -18,11 +18,22 @@ class ProfileBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
+    return SingleChildScrollView(
       child: Column(
         children: [
-          ProfileForm(),
-          const _CardContainer(),
+          const Divider(height: 50),
+          const CircleAvatar(
+              child: FlutterLogo(
+                size: 120,
+              ),
+              backgroundColor: Colors.transparent),
+          BlocBuilder<ProfileBloc, ProfileState>(
+            buildWhen: (previous, current) => previous != current,
+            builder: (context, state) {
+              return ProfileForm();
+            },
+          ),
+          const _WalletContainer(),
           const _LogOutButton(),
         ],
       ),
@@ -30,8 +41,8 @@ class ProfileBody extends StatelessWidget {
   }
 }
 
-class _CardContainer extends StatelessWidget {
-  const _CardContainer({Key? key}) : super(key: key);
+class _WalletContainer extends StatelessWidget {
+  const _WalletContainer({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

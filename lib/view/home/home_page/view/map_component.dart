@@ -2,9 +2,9 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:hackathon_app/core/extensions/context_extension.dart';
-import 'package:hackathon_app/core/model/container_model.dart';
-import 'package:hackathon_app/core/components/bottom_sheet/custom_bottom_sheet.dart';
+import '../../../../core/extensions/context_extension.dart';
+import '../../../../core/model/container_model.dart';
+import '../../../../core/components/bottom_sheet/custom_bottom_sheet.dart';
 
 class MapComponent extends StatelessWidget {
   const MapComponent({Key? key}) : super(key: key);

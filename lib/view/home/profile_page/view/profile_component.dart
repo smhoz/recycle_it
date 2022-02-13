@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hackathon_app/core/utils/locator_get_it.dart';
+import '../../../../core/utils/locator_get_it.dart';
 
 import '../viewmodel/bloc/profile_bloc.dart';
 import 'profile_body.dart';

@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:hackathon_app/core/repository/auth_repository.dart';
+import '../../../../../core/repository/auth_repository.dart';
 
 import '../../../../../core/utils/locator_get_it.dart';
 
@@ -41,5 +41,16 @@ class RegisterCubit extends Cubit<RegisterState> {
     } else {
       return null;
     }
+  }
+
+  @override
+  Future<void> close() {
+    nameController.dispose();
+    surnameController.dispose();
+    mailController.dispose();
+    phoneController.dispose();
+    passwordController.dispose();
+    confirmPassowrdController.dispose();
+    return super.close();
   }
 }

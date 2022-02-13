@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:hackathon_app/core/repository/global_repositor.dart';
-import 'package:hackathon_app/core/utils/locator_get_it.dart';
+import '../../../../../core/repository/global_repositor.dart';
+import '../../../../../core/utils/locator_get_it.dart';
 
 import '../../../../../../../core/network/user_service.dart';
 import '../bloc/profile_bloc.dart';
@@ -38,9 +38,10 @@ class BalanceCubit extends Cubit<BalanceState> {
     final _userDBService = UserService();
     final _user = getIt<GlobalRepository>().user;
     int _newBalance = balanceValue + int.parse(_user?.balance ?? "");
-
     bool _result = await _userDBService.updateBalance(
-        uid: _user?.uid ?? "", balance: _newBalance.toString());
+      uid: _user?.uid ?? "",
+      balance: _newBalance.toString(),
+    );
     _getUpdatedUser();
     return _result;
   }

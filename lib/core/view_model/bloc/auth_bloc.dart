@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:hackathon_app/core/model/user_model.dart';
-import 'package:hackathon_app/core/repository/auth_repository.dart';
-import 'package:hackathon_app/core/utils/locator_get_it.dart';
+import '../../model/user_model.dart';
+import '../../repository/auth_repository.dart';
+import '../../utils/locator_get_it.dart';
 
 import '../../repository/global_repositor.dart';
 

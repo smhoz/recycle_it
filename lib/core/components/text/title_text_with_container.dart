@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hackathon_app/core/extensions/context_extension.dart';
+import '../../extensions/context_extension.dart';
 
 class TitleTextWithContainer extends StatelessWidget {
   final String text;

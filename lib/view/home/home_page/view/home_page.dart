@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
-import 'package:hackathon_app/core/extensions/context_extension.dart';
-import 'package:hackathon_app/core/init/theme/color/custom_colors.dart';
-import 'package:hackathon_app/core/init/widget/bottom_bar_items.dart';
+import '../../../../core/extensions/context_extension.dart';
+import '../../../../core/init/theme/color/custom_colors.dart';
+import '../../../../core/init/widget/bottom_bar_items.dart';
 import 'package:provider/provider.dart';
 
 import '../viewmodel/home_view_model.dart';

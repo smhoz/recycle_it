@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:hackathon_app/core/repository/global_repositor.dart';
+import '../../../../../core/repository/global_repositor.dart';
 
 import '../../../../../../core/utils/locator_get_it.dart';
 

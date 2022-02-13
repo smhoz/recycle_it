@@ -1,7 +1,7 @@
-import 'package:hackathon_app/core/consts/keys.dart';
-import 'package:hackathon_app/core/model/user_model.dart';
-import 'package:hackathon_app/core/network/user_service.dart';
-import 'package:hackathon_app/core/repository/global_repositor.dart';
+import '../consts/keys.dart';
+import '../model/user_model.dart';
+import '../network/user_service.dart';
+import 'global_repositor.dart';
 
 import '../utils/json_webtoken.dart';
 import '../utils/locator_get_it.dart';

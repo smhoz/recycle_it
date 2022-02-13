@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:hackathon_app/core/model/recyclable_model.dart';
+import 'recyclable_model.dart';
 
 class RecycleContainer {
   String? name;

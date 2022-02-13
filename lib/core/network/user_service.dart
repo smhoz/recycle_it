@@ -1,6 +1,6 @@
 import 'package:firebase_db_rest/firebase_db_rest.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:hackathon_app/core/model/user_model.dart';
+import '../model/user_model.dart';
 
 import '../utils/json_webtoken.dart';
 
@@ -50,10 +50,8 @@ class UserService implements IUserService {
       String? name,
       String? surname,
       String? mail}) async {
-    User _data =
-        User(mail: mail, name: name, surname: surname, uid: uid, balance: "0");
-    bool _result =
-        await _dbService.updateUser(map: _data.toMap(), spesificId: uid);
+    Map _data = {"mail": mail, "name": name, "surname": surname, "uid": uid};
+    bool _result = await _dbService.updateUser(map: _data, spesificId: uid);
     return _result;
   }
 

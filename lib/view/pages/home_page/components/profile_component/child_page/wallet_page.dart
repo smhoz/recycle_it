@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../core/utils/locator_get_it.dart';
-import 'wallet_form.dart';
+import 'package:hackathon_app/core/utils/locator_get_it.dart';
+import 'package:hackathon_app/view/home/profile_page/view/wallet_form.dart';
 
-import 'components/_alert_dialog.dart';
-import '../viewmodel/cubit/balance_cubit.dart';
+import '../../../../../../core/components/text/input_field.dart';
+import '../../../../../home/profile_page/view/components/_alert_dialog.dart';
+import '../../../../../home/profile_page/viewmodel/cubit/balance_cubit.dart';
 
 class WalletPage extends StatelessWidget {
-  const WalletPage({Key? key}) : super(key: key);
+  WalletPage({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     final _cubit = getIt<BalanceCubit>();
@@ -91,8 +92,12 @@ class _BalanceInput extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [],
+    final _cubit = context.read<BalanceCubit>();
+    return Flexible(
+      child: InputField(
+        controller: _cubit.balanceController,
+        textInputType: TextInputType.number,
+      ),
     );
   }
 }
