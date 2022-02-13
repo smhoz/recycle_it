@@ -31,12 +31,13 @@ extension PaddingExtension on BuildContext {
 
   EdgeInsets get paddingHorizontalMedium =>
       EdgeInsets.symmetric(horizontal: mediumHeight);
-  EdgeInsets get paddingVerticalMedium =>
-      EdgeInsets.symmetric(vertical: lowHeight);
 
   EdgeInsets get onlyRightPaddingMedium => EdgeInsets.only(right: mediumHeight);
   EdgeInsets get symetricPadding =>
       EdgeInsets.symmetric(vertical: lowHeight, horizontal: highHeight);
+
+  EdgeInsets get homesymetricPadding =>
+      EdgeInsets.symmetric(vertical: highHeight, horizontal: lowHeight);
 
   EdgeInsets get privateBottomBarPadding =>
       const EdgeInsets.symmetric(horizontal: 20, vertical: 12);
