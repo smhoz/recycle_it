@@ -11,7 +11,7 @@ class InputField extends StatelessWidget {
   final String? helperText;
   final double? borderRadius;
   final EdgeInsets? padding;
-  final Function(String)? validator;
+  final String? Function(String?)? validator;
   final int? maxLength;
   final TextEditingController? controller;
   final Function(String)? onChanged;
@@ -39,7 +39,7 @@ class InputField extends StatelessWidget {
     this.readOnly,
   }) : super(key: key);
 
-  final formKey = GlobalKey<FormState>();
+
 
   @override
   Widget build(BuildContext context) {
@@ -57,11 +57,8 @@ class InputField extends StatelessWidget {
             height: 60,
             decoration: _boxDecoration(),
           ),
-          Form(
-            key: formKey,
-            child: Center(
-              child: _textFormField(context, border),
-            ),
+          Center(
+            child: _textFormField(context, border),
           ),
         ],
       ),
@@ -79,7 +76,7 @@ class InputField extends StatelessWidget {
       controller: controller,
       obscureText: isPassword!,
       keyboardType: textInputType,
-      validator: emptyValidator!,
+      validator: validator ?? emptyValidator,
       autovalidateMode: AutovalidateMode.onUserInteraction,
       decoration: _inputDecoration(context, border),
     );
