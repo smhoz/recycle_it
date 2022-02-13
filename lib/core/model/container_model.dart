@@ -6,14 +6,16 @@ import 'recyclable_model.dart';
 class RecycleContainer {
   String? name;
   LatLng? location; //TODO: Convert this data type to GeoPoint
+  String? address;
   List<Recyclable>? recyclables;
 
-  RecycleContainer({this.name, this.location, this.recyclables});
+  RecycleContainer({this.name, this.location, this.recyclables, this.address});
 
   Map<String, dynamic> toMap() {
     return {
       'name': name,
       'location': location,
+      'address': address,
       'recyclables': recyclables,
     };
   }
@@ -22,6 +24,7 @@ class RecycleContainer {
     return RecycleContainer(
       name: map['name'],
       location: map['location'],
+      address: map['address'],
       recyclables: map['recyclables'],
     );
   }
