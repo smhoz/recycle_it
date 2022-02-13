@@ -30,15 +30,20 @@ class CustomRoundedButton extends StatelessWidget {
             color: context.themeColor.primary,
             borderRadius: BorderRadius.circular(borderRadius!),
           ),
-          child: TextButton.icon(
+          child: TextButton(
             onPressed: onTap,
-            icon: icon!,
-            label: Text(
-              title!,
-              style: context.textTheme.bodyMedium!.copyWith(
-                  letterSpacing: 2,
-                  color: context.theme.cardColor,
-                  fontSize: 24),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                icon ?? const SizedBox.shrink(),
+                Text(
+                  title!,
+                  style: context.textTheme.bodyMedium!.copyWith(
+                      letterSpacing: 2,
+                      color: context.theme.cardColor,
+                      fontSize: 24),
+                ),
+              ],
             ),
           ),
         ),
