@@ -5,7 +5,6 @@ import '../../../view/home/home_page/view/map_component.dart';
 import '../../../view/home/profile_page/view/profile_component.dart';
 import '../../../view/home/shop_page/view/shop_page.dart';
 
-
 class BottomBarItems {
   static BottomBarItems? _instance;
   BottomBarItems._();
@@ -20,7 +19,7 @@ class BottomBarItems {
   final List<GButton> items = const <GButton>[
     GButton(
       icon: Icons.home_filled,
-      text: 'Home',
+      text: 'Ana Sayfa',
     ),
     GButton(
       icon: Icons.shopping_bag_outlined,
@@ -28,7 +27,7 @@ class BottomBarItems {
     ),
     GButton(
       icon: Icons.person_outline_outlined,
-      text: 'Profile',
+      text: 'Profil',
     ),
   ];
 }

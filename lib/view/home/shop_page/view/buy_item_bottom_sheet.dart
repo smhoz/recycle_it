@@ -77,7 +77,7 @@ class BuyItemBottomSheet extends StatelessWidget {
 
   Widget _buyButton(BuildContext context) {
     return CustomRoundedButton(
-      title: "BUY",
+      title: "SATIN AL",
       onTap: () {
         Navigator.pop(context);
         balanceUpdate().then((value) {

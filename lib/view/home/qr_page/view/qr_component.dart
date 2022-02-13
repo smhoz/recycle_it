@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hackathon_app/core/extensions/context_extension.dart';
+import 'package:hackathon_app/view/home/convert_page/view/convert_page.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
 class QRPage extends StatefulWidget {
@@ -25,6 +26,9 @@ class _QRPageState extends State<QRPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: context.themeColor.primary,
+      appBar: AppBar(
+        title: const Text("Tara"),
+      ),
       body: SafeArea(
         child: _QRBody(),
       ),
@@ -46,13 +50,10 @@ class _QRPageState extends State<QRPage> {
       setState(() {
         result = scanData;
         Navigator.pop(context);
-        //TODO: Navigate to ConvertPage
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => Scaffold(
-              body: Center(child: Text(result!.code!)),
-            ),
+            builder: (context) => ConvertPage(id: result!.code!),
           ),
         );
       });

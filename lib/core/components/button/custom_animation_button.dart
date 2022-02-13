@@ -48,7 +48,7 @@ class _CustomAnimationRoundedButtonState
                       ),
                       const SizedBox(width: 20.0),
                       Text(
-                        "Please wait....",
+                        "Lütfen bekleyin...",
                         style: context.textTheme.headline2,
                       )
                     ],

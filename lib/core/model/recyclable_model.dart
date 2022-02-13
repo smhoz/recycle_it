@@ -4,6 +4,24 @@ enum RecyclableType { paper, plastic, glass, clothes, oil, battery, none }
 
 extension RecyclableName on RecyclableType {
   String get getName => name;
+  String getTranslation() {
+    switch (this) {
+      case RecyclableType.battery:
+        return "Atık Pil";
+      case RecyclableType.plastic:
+        return "Plastik";
+      case RecyclableType.glass:
+        return "Cam";
+      case RecyclableType.clothes:
+        return "Kıyafet";
+      case RecyclableType.oil:
+        return "Atık Yağ";
+      case RecyclableType.paper:
+        return "Kağıt";
+      default:
+        return "Yok";
+    }
+  }
 }
 
 class Recyclable {

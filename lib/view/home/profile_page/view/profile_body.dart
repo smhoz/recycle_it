@@ -94,7 +94,7 @@ class _WalletContainer extends StatelessWidget {
       SizedBox(
         width: context.width * 0.02,
       ),
-      Text(((getIt<GlobalRepository>().user?.balance) ?? 0).toString())
+      Text("₺${((getIt<GlobalRepository>().user?.balance) ?? 0).toString()}")
     ]);
   }
 }

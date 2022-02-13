@@ -16,7 +16,7 @@ class RecyclableProgressBar extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           Text(
-            recyclable!.type!.getName,
+            recyclable!.type!.getTranslation(),
             style: context.textTheme.bodyMedium!.copyWith(fontSize: 18),
           ),
           Padding(
