@@ -1,5 +1,3 @@
-import 'entity_category.dart';
-
 class Item {
   final String? imageURL;
   final String? title;
@@ -11,10 +9,15 @@ class Item {
   });
 
   factory Item.fromMap(Map<String, dynamic> map) {
+    var price=map["price"];
+    if (map['price'] is int) {
+      price = (map['price'] as int).toDouble();
+    }
+
     return Item(
       imageURL: map['imageURL'],
       title: map['title'],
-      price: map['price'],
+      price: price,
     );
   }
 }

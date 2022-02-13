@@ -120,25 +120,42 @@ class ShopPage extends StatelessWidget {
       scrollDirection: Axis.horizontal,
       itemCount: items.length,
       itemBuilder: (context, index) {
-        return SizedBox(
-          width: width ?? context.width * 0.7,
-          child: Card(
-              shape: RoundedRectangleBorder(
-                  borderRadius: CustomBorderRadius.normalCircular()),
-              margin: context.paddingMedium,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    items[index].imageURL.toString(),
-                    style: context.textTheme.bodyText1,
-                  ),
-                  const Icon(
-                    Icons.arrow_forward_ios,
-                    color: Colors.white,
-                  )
-                ],
-              )),
+        return Card(
+          shape: RoundedRectangleBorder(
+              borderRadius: CustomBorderRadius.normalCircular()),
+          margin: context.paddingMedium,
+          child: GestureDetector(
+            onTap: () {},
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                  decoration: BoxDecoration(
+                      borderRadius: CustomBorderRadius.normalCircular(),
+                      image: DecorationImage(
+                          image:
+                              NetworkImage(items[index].imageURL.toString()))),
+                  width: width ?? context.width * 0.7,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          items[index].title.toString(),
+                          style: context.textTheme.bodyText1!
+                              .copyWith(fontSize: 15),
+                          maxLines: 2,
+                        ),
+                      ),
+                      const Icon(
+                        Icons.arrow_forward_ios,
+                        color: Colors.black,
+                      )
+                    ],
+                  )),
+            ),
+          ),
         );
       },
     );
