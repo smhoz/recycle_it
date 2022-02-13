@@ -104,16 +104,29 @@ class _LogOutButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: context.paddingMedium,
-      child: TextButton.icon(
-        onPressed: () => getIt<AuthRepository>().signOut().then((value) =>
-            context.router.replaceAll([const AuthControllerRoute()])),
-        icon: const Icon(
-          Icons.exit_to_app,
-        ),
-        label: Text(
-          'Çıkış Yap',
-        ),
+      padding: context.paddingLow,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Padding(
+            padding: context.homesymetricPadding,
+            child: Text(
+              "Profil",
+              style: context.textTheme.bodyText1!
+                  .copyWith(fontSize: 28, fontWeight: FontWeight.w500),
+            ),
+          ),
+          TextButton.icon(
+            onPressed: () => getIt<AuthRepository>().signOut().then((value) =>
+                context.router.replaceAll([const AuthControllerRoute()])),
+            icon: const Icon(
+              Icons.exit_to_app,
+            ),
+            label: const Text(
+              'Çıkış Yap',
+            ),
+          ),
+        ],
       ),
     );
   }
