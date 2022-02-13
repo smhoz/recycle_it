@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-enum RecyclableType { paper, plastic, glass, clothes, oil, battery }
+enum RecyclableType { paper, plastic, glass, clothes, oil, battery, none }
 
 extension RecyclableName on RecyclableType {
   String get getName => name;
@@ -37,4 +37,11 @@ class Recyclable {
 
   factory Recyclable.fromJson(String source) =>
       Recyclable.fromMap(json.decode(source));
+
+  static RecyclableType fromString(String value) {
+    for (var type in RecyclableType.values) {
+      if (type.getName == value) return type;
+    }
+    return RecyclableType.none;
+  }
 }
