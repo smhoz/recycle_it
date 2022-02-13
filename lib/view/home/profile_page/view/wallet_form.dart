@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hackathon_app/core/extensions/context_extension.dart';
 import 'package:hackathon_app/core/utils/locator_get_it.dart';
-import 'package:hackathon_app/view/widgets/_custom_text_field.dart';
-import 'package:hackathon_app/view/widgets/_widget_const.dart';
 
-import 'cubit/balance_cubit.dart';
+import '../../../../core/commons/_custom_text_field.dart';
+import '../viewmodel/cubit/balance_cubit.dart';
 
 class WalletForm extends StatelessWidget {
   const WalletForm({Key? key}) : super(key: key);
@@ -21,7 +20,6 @@ class WalletForm extends StatelessWidget {
           CustomTextFormField(
               controller: _cubit.cardNumberController,
               labelText: 'Card number'),
-          WC.tpDivider,
           Row(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -34,12 +32,10 @@ class WalletForm extends StatelessWidget {
                   controller: _cubit.cvvController, labelText: 'CVV'),
             ],
           ),
-          WC.tpDivider,
           CustomTextFormField(
             controller: _cubit.cardHoldersNameController,
             labelText: 'Cardholder\'s name',
           ),
-          WC.tpDivider,
           const _Switch(),
         ],
       ),

@@ -3,9 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hackathon_app/core/utils/locator_get_it.dart';
 import 'package:hackathon_app/view/home/profile_page/view/wallet_form.dart';
 
-import '../../../widgets/_widget_const.dart';
 import 'components/_alert_dialog.dart';
-import 'cubit/balance_cubit.dart';
+import '../viewmodel/cubit/balance_cubit.dart';
 
 class WalletPage extends StatelessWidget {
   const WalletPage({Key? key}) : super(key: key);
@@ -31,20 +30,17 @@ class WalletPage extends StatelessWidget {
         create: (context) => _cubit,
         child: ListView(
           children: [
-            WC.paddingAll(
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  _IconButton(
-                      iconName: Icons.remove,
-                      changeValue: _cubit.balanceDecrement),
-                  const _BalanceInput(),
-                  _IconButton(
-                      iconName: Icons.add,
-                      changeValue: _cubit.balanceIncrement),
-                ],
-              ),
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                _IconButton(
+                    iconName: Icons.remove,
+                    changeValue: _cubit.balanceDecrement),
+                const _BalanceInput(),
+                _IconButton(
+                    iconName: Icons.add, changeValue: _cubit.balanceIncrement),
+              ],
             ),
             const SizedBox(
               height: 50,
@@ -53,12 +49,11 @@ class WalletPage extends StatelessWidget {
               "Card Info",
             ),
             const WalletForm(),
-            WC.paddingAll(
-                child: ElevatedButton(
-                    onPressed: () {
-                      WalletAlertDialog.showMyDialog(context);
-                    },
-                    child: const Text('Submit')))
+            ElevatedButton(
+                onPressed: () {
+                  WalletAlertDialog.showMyDialog(context);
+                },
+                child: const Text('Submit'))
           ],
         ),
       ),

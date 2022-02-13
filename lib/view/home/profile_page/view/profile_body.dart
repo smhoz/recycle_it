@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hackathon_app/core/consts/navigation_const.dart';
 import 'package:hackathon_app/core/extensions/context_extension.dart';
 import 'package:hackathon_app/core/init/theme/color/custom_colors.dart';
@@ -9,6 +10,7 @@ import 'package:hackathon_app/core/repository/global_repositor.dart';
 import 'package:hackathon_app/core/utils/border/custom_border_radius.dart';
 
 import '../../../../../../core/utils/locator_get_it.dart';
+import '../viewmodel/bloc/profile_bloc.dart';
 import 'profile_form.dart';
 
 class ProfileBody extends StatelessWidget {
@@ -49,17 +51,22 @@ class _CardContainer extends StatelessWidget {
           "Cüzdanım",
           style: context.textTheme.headline1,
         ),
-        subtitle: Row(children: [
-          Icon(
-            Icons.circle,
-            color: CustomColors.instance.coinColor,
-            size: 24,
-          ),
-          SizedBox(
-            width: context.width * 0.02,
-          ),
-          Text(((getIt<GlobalRepository>().user?.balance) ?? 0).toString())
-        ]),
+        subtitle: BlocBuilder<ProfileBloc, ProfileState>(
+          buildWhen: (previous, current) => previous != current,
+          builder: (context, state) {
+            return Row(children: [
+              Icon(
+                Icons.circle,
+                color: CustomColors.instance.coinColor,
+                size: 24,
+              ),
+              SizedBox(
+                width: context.width * 0.02,
+              ),
+              Text(((getIt<GlobalRepository>().user?.balance) ?? 0).toString())
+            ]);
+          },
+        ),
         trailing: IconButton(
             onPressed: (() {
               context.router.pushNamed(RouteConsts.WALLET_PAGE);
@@ -72,6 +79,11 @@ class _CardContainer extends StatelessWidget {
     );
   }
 }
+
+/* 
+
+
+*/
 
 class _LogOutButton extends StatelessWidget {
   const _LogOutButton({Key? key}) : super(key: key);

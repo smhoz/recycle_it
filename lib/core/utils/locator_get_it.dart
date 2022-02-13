@@ -1,7 +1,7 @@
 import 'package:get_it/get_it.dart';
 import 'package:hackathon_app/core/repository/auth_repository.dart';
 
-import '../../view/home/profile_page/view/cubit/balance_cubit.dart';
+import '../../view/home/profile_page/viewmodel/cubit/balance_cubit.dart';
 import '../../view/home/profile_page/viewmodel/bloc/profile_bloc.dart';
 import '../repository/global_repositor.dart';
 

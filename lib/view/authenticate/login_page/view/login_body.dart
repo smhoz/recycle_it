@@ -2,13 +2,13 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hackathon_app/core/extensions/context_extension.dart';
-import 'package:hackathon_app/view/widgets/_print_message.dart';
 import 'package:hackathon_app/core/components/button/custom_rounded_button.dart';
 import 'package:hackathon_app/core/components/text/input_field.dart';
 
+import '../../../../core/commons/_print_message.dart';
+import '../../../../core/commons/_validators.dart';
 import '../../../../core/consts/navigation_const.dart';
 import '../../../../core/view_model/bloc/auth_bloc.dart';
-import '../../../widgets/_validators.dart';
 import '../viewmodel/cubit/login_cubit.dart';
 
 class LoginBody extends StatelessWidget {

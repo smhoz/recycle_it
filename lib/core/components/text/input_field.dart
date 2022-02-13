@@ -15,6 +15,7 @@ class InputField extends StatelessWidget {
   final int? maxLength;
   TextEditingController? controller;
   final Function(String)? onChanged;
+  
 
   InputField({
     Key? key,
@@ -50,52 +51,64 @@ class InputField extends StatelessWidget {
           Container(
             height: 60,
             width: context.width,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(borderRadius!),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black26,
-                  blurRadius: 4,
-                  offset: validatorShadowOffset,
-                )
-              ],
-            ),
+            decoration: _boxDecoration(),
           ),
           Form(
             key: formKey,
             child: Center(
-              child: TextFormField(
-                onChanged: onChanged,
-                maxLength: maxLength,
-                textAlign: TextAlign.center,
-                controller: controller,
-                readOnly: true,
-                obscureText: isPassword!,
-                keyboardType: textInputType,
-                validator: emptyValidator!,
-                autovalidateMode: AutovalidateMode.onUserInteraction,
-                decoration: InputDecoration(
-                  labelText: title,
-                  prefixIcon: icon,
-                  helperText: helperText,
-                  prefixText: prefix,
-                  filled: true,
-                  fillColor: context.theme.cardColor,
-                  prefixIconConstraints: const BoxConstraints(minWidth: 72),
-                  border: border,
-                  enabledBorder: border.copyWith(
-                      borderSide: BorderSide(color: context.theme.cardColor)),
-                  focusedBorder: border.copyWith(
-                    borderSide: BorderSide(
-                      color: context.themeColor.secondary,
-                    ),
-                  ),
-                ),
-              ),
+              child: _textFormField(context, border),
             ),
           ),
         ],
       ),
+    );
+  }
+
+  TextFormField _textFormField(
+      BuildContext context, OutlineInputBorder border) {
+    return TextFormField(
+      onChanged: onChanged,
+      maxLength: maxLength,
+      controller: controller,
+      obscureText: isPassword!,
+      keyboardType: textInputType,
+      validator: emptyValidator!,
+      autovalidateMode: AutovalidateMode.onUserInteraction,
+      decoration: _inputDecoration(context, border),
+    );
+  }
+
+  InputDecoration _inputDecoration(
+      BuildContext context, OutlineInputBorder border) {
+    return InputDecoration(
+      labelText: title,
+      prefixIcon: icon,
+      helperText: helperText,
+      prefixText: prefix,
+      filled: true,
+      fillColor: context.theme.cardColor,
+      prefixIconConstraints: const BoxConstraints(minWidth: 72),
+      border: border,
+      enabledBorder: border.copyWith(
+          borderSide: BorderSide(color: context.theme.cardColor)),
+      focusedBorder: border.copyWith(
+        borderSide: BorderSide(
+          color: context.themeColor.secondary,
+        ),
+      ),
+    );
+  }
+
+  BoxDecoration _boxDecoration() {
+    return BoxDecoration(
+      borderRadius: BorderRadius.circular(borderRadius!),
+      boxShadow: [
+        BoxShadow(
+          color: Colors.black26,
+          blurRadius: 4,
+          offset: validatorShadowOffset,
+        )
+      ],
     );
   }
 }

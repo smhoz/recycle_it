@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../../../core/utils/locator_get_it.dart';
-import '../cubit/balance_cubit.dart';
+import '../../viewmodel/cubit/balance_cubit.dart';
 
 class WalletAlertDialog {
   static Future<void> showMyDialog(BuildContext context) async {

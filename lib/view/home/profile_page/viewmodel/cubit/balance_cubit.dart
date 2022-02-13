@@ -5,7 +5,7 @@ import 'package:hackathon_app/core/repository/global_repositor.dart';
 import 'package:hackathon_app/core/utils/locator_get_it.dart';
 
 import '../../../../../../../core/network/user_service.dart';
-import '../../viewmodel/bloc/profile_bloc.dart';
+import '../bloc/profile_bloc.dart';
 
 part 'balance_state.dart';
 
