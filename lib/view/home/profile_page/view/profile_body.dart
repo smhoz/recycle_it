@@ -18,24 +18,26 @@ class ProfileBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          const Divider(height: 50),
-          const CircleAvatar(
-              child: FlutterLogo(
-                size: 120,
-              ),
-              backgroundColor: Colors.transparent),
-          BlocBuilder<ProfileBloc, ProfileState>(
-            buildWhen: (previous, current) => previous != current,
-            builder: (context, state) {
-              return ProfileForm();
-            },
-          ),
-          const _WalletContainer(),
-          const _LogOutButton(),
-        ],
+    return SafeArea(
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            const Divider(height: 50),
+            const CircleAvatar(
+                child: FlutterLogo(
+                  size: 120,
+                ),
+                backgroundColor: Colors.transparent),
+            BlocBuilder<ProfileBloc, ProfileState>(
+              buildWhen: (previous, current) => previous != current,
+              builder: (context, state) {
+                return ProfileForm();
+              },
+            ),
+            const _WalletContainer(),
+            const _LogOutButton(),
+          ],
+        ),
       ),
     );
   }
