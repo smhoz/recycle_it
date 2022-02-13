@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hackathon_app/core/commons/_print_message.dart';
 
 import '../../../../../../../core/utils/locator_get_it.dart';
 import '../../viewmodel/cubit/balance_cubit.dart';
@@ -19,16 +20,19 @@ class WalletAlertDialog {
           ),
           actions: <Widget>[
             TextButton(
-              child: const Text('Approve'),
+              child: const Text('Cancel'),
               onPressed: () {
-                getIt<BalanceCubit>().balanceUpdate();
                 Navigator.of(context).pop();
               },
             ),
             TextButton(
-              child: const Text('Cancel'),
+              child: const Text('Approve'),
               onPressed: () {
+                getIt<BalanceCubit>().balanceUpdate();
                 Navigator.of(context).pop();
+                Navigator.of(context).pop();
+                PrintMessage.showSucces(context,
+                    message: "Bakiye yükleme başarılı!");
               },
             ),
           ],
