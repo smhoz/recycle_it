@@ -162,7 +162,7 @@ class ItemCard extends StatelessWidget {
           ),
           width: context.width * 0.7,
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Padding(
                 padding: const EdgeInsets.all(8.0),
