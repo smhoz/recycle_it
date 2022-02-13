@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hackathon_app/core/extensions/context_extension.dart';
+import 'package:hackathon_app/core/model/conversion_model.dart';
 import 'package:hackathon_app/view/home/convert_page/viewmodel/convert_page_viewmodel.dart';
 import 'package:provider/provider.dart';
 
@@ -13,10 +14,12 @@ import '../../../../core/utils/locator_get_it.dart';
 import '../../profile_page/viewmodel/bloc/profile_bloc.dart';
 
 class ConvertPage extends StatelessWidget {
-  const ConvertPage({Key? key}) : super(key: key);
+  final String? id;
+  const ConvertPage({Key? key, this.id}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    context.read<ConvertPageViewModel>().getItems(id);
     return Scaffold(
       body: Column(
         children: [
@@ -27,7 +30,7 @@ class ConvertPage extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 30.0),
               child: Text(
-                "Congratulations!",
+                "TEBRİKLER!",
                 style: context.textTheme.headline2,
               ),
             ),

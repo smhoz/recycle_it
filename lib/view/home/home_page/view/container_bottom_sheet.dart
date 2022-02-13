@@ -78,7 +78,15 @@ class ContainerBottomSheet extends StatelessWidget {
 
   ListTile _containerName(BuildContext context) {
     return ListTile(
-      leading: const Icon(Icons.delete, size: 48),
+      leading: CircleAvatar(
+        radius: 32,
+        backgroundColor: context.themeColor.primary,
+        child: Icon(
+          Icons.delete,
+          size: 32,
+          color: context.theme.cardColor,
+        ),
+      ),
       title: Text(
         container!.name!,
         style: context.textTheme.headline1,
