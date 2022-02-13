@@ -88,7 +88,6 @@ class _SignInButton extends StatelessWidget {
     return BlocBuilder<LoginCubit, LoginState>(
       buildWhen: (previous, current) => previous != current,
       builder: (context, state) {
-        
         if (state is LoginLoading) {
           return const Center(child: CircularProgressIndicator());
         } else {
@@ -96,11 +95,17 @@ class _SignInButton extends StatelessWidget {
               onTap: state
                       is LoginCompleted // Giriş başarılıysa buton pasife düşecek.
                   ? null
-                  : () => loginpageCubit.formKey.currentState!.validate() ==
-                          true
-                      ? loginpageCubit.signIn().then((value) =>
-                          context.read<AuthBloc>().add(AuthTryGetCurrentUser()))
-                      : null,
+                  : () =>
+                      loginpageCubit.formKey.currentState!.validate() == true
+                          ? loginpageCubit
+                              .signIn()
+                              .then((value) => context
+                                  .read<AuthBloc>()
+                                  .add(AuthTryGetCurrentUser()))
+                              .then((value) {
+                              FocusManager.instance.primaryFocus?.unfocus();
+                            })
+                          : null,
               title: "Giriş Yap");
         }
       },
