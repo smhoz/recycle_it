@@ -18,14 +18,12 @@ class BalanceCubit extends Cubit<BalanceState> {
   void balanceIncrement() {
     balanceValue += 5;
     balanceController.text = balanceValue.toString();
-    emit(BalanceChanged(balanceValue));
   }
 
   void balanceDecrement() {
     if (balanceValue >= 5) {
       balanceValue -= 5;
       balanceController.text = balanceValue.toString();
-      emit(BalanceChanged(balanceValue));
     }
   }
 
