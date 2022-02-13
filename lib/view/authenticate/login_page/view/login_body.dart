@@ -35,35 +35,43 @@ class LoginBody extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            Column(
-              children: [
-                InputField(
-                  icon: const Icon(Icons.email_outlined),
-                  title: "Email",
-                  validator: Validators.mailValidator,
-                  controller: _loginpageCubit.mailController,
-                ),
-                InputField(
-                  isPassword: true,
-                  validator: Validators.passwordValidator,
-                  icon: const Icon(Icons.password),
-                  title: "Şifre",
-                  controller: _loginpageCubit.passwordController,
-                ),
-              ],
-            ),
+            _body(_loginpageCubit),
             _SignInButton(
               loginpageCubit: _loginpageCubit,
             ),
-            Column(
-              children: [
-                const Text.rich(TextSpan(text: "Bir hesabın yok mu ?")),
-                _SignUpButton(),
-              ],
-            )
+            _signUpButton()
           ],
         ),
       ),
+    );
+  }
+
+  Column _signUpButton() {
+    return Column(
+      children: [
+        const Text.rich(TextSpan(text: "Bir hesabın yok mu ?")),
+        _SignUpButton(),
+      ],
+    );
+  }
+
+  Column _body(LoginCubit _loginpageCubit) {
+    return Column(
+      children: [
+        InputField(
+          icon: const Icon(Icons.email_outlined),
+          title: "Email",
+          validator: Validators.mailValidator,
+          controller: _loginpageCubit.mailController,
+        ),
+        InputField(
+          isPassword: true,
+          validator: Validators.passwordValidator,
+          icon: const Icon(Icons.password),
+          title: "Şifre",
+          controller: _loginpageCubit.passwordController,
+        ),
+      ],
     );
   }
 }
@@ -80,7 +88,6 @@ class _SignInButton extends StatelessWidget {
     return BlocBuilder<LoginCubit, LoginState>(
       buildWhen: (previous, current) => previous != current,
       builder: (context, state) {
-        
         if (state is LoginLoading) {
           return const Center(child: CircularProgressIndicator());
         } else {
