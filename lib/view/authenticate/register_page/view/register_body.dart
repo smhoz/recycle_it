@@ -86,13 +86,13 @@ class _SubmitButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final _registerpageCubit = context.read<RegisterCubit>();
     return BlocListener<RegisterCubit, RegisterState>(
-      listenWhen: (previous, current) => previous != current,
       listener: (context, state) async {
         if (state is RegisterError) {
           PrintMessage.showFailed(context, state.errorMessage);
         } else {
           PrintMessage.showSucces(context);
-          context.router.replace(const AuthControllerRoute());
+          await Future.delayed(const Duration(microseconds: 200));
+          context.router.replace(const LoginRoute());
         }
       },
       child: CustomRoundedButton(
