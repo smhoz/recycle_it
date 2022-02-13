@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../../../view/home/home_page/viewmodel/home_view_model.dart';
 import '../../extensions/context_extension.dart';
 
 class CustomBottomSheet extends StatelessWidget {
@@ -23,35 +25,10 @@ class CustomBottomSheet extends StatelessWidget {
           maxChildSize: maxSize,
           builder: (BuildContext context, ScrollController scrollController) {
             return Container(
-              decoration: BoxDecoration(
-                color: context.theme.canvasColor,
-                borderRadius:
-                    const BorderRadius.vertical(top: Radius.circular(32)),
-                boxShadow: [
-                  BoxShadow(
-                    color: context.theme.focusColor,
-                    offset: const Offset(0, -1),
-                    blurRadius: 3,
-                    spreadRadius: 3,
-                  )
-                ],
-              ),
+              decoration: _boxDecoration(context),
               child: Column(
                 children: [
-                  InkWell(
-                    onTap: () => Navigator.pop(context),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 12),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: context.themeColor.primary.withOpacity(0.6),
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        height: context.lowHeight,
-                        width: context.highHeight,
-                      ),
-                    ),
-                  ),
+                  _topBackButton(context),
                   Expanded(
                     child: SingleChildScrollView(
                       controller: scrollController,
@@ -67,6 +44,45 @@ class CustomBottomSheet extends StatelessWidget {
           child: bottomPinnedChild,
           alignment: Alignment.bottomCenter,
         ),
+      ],
+    );
+  }
+
+  InkWell _topBackButton(BuildContext context) {
+    return InkWell(
+      onTap: () {
+        Navigator.pop(context);
+        context.read<HomeViewModel>().changeIsShowModalBottomSheet(false);
+      },
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 12),
+        child: Container(
+          decoration: _backButtonBoxDecoration(context),
+          height: context.lowHeight,
+          width: context.highHeight,
+        ),
+      ),
+    );
+  }
+
+  BoxDecoration _backButtonBoxDecoration(BuildContext context) {
+    return BoxDecoration(
+      color: context.themeColor.primary.withOpacity(0.6),
+      borderRadius: BorderRadius.circular(12),
+    );
+  }
+
+  BoxDecoration _boxDecoration(BuildContext context) {
+    return BoxDecoration(
+      color: context.theme.canvasColor,
+      borderRadius: const BorderRadius.vertical(top: Radius.circular(32)),
+      boxShadow: [
+        BoxShadow(
+          color: context.theme.focusColor,
+          offset: const Offset(0, -1),
+          blurRadius: 3,
+          spreadRadius: 3,
+        )
       ],
     );
   }
