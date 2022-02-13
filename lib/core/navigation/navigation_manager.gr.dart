@@ -13,10 +13,10 @@
 import 'package:auto_route/auto_route.dart' as _i7;
 import 'package:flutter/material.dart' as _i8;
 
-import '../../view/home/profile_page/view/wallet_page.dart' as _i5;
-import '../../view/home/home_page/view/home_page.dart' as _i3;
 import '../../view/authenticate/login_page/view/login_page.dart' as _i2;
 import '../../view/authenticate/register_page/view/register_page.dart' as _i4;
+import '../../view/home/home_page/view/home_page.dart' as _i3;
+import '../../view/home/profile_page/view/wallet_page.dart' as _i5;
 import '../../view/home/splash_page/view/splash_body.dart' as _i6;
 import '../../view/home/splash_page/view/splash_page.dart' as _i1;
 
@@ -43,10 +43,8 @@ class AppRouter extends _i7.RootStackRouter {
           routeData: routeData, child: const _i4.RegisterPage());
     },
     WalletRoute.name: (routeData) {
-      final args = routeData.argsAs<WalletRouteArgs>(
-          orElse: () => const WalletRouteArgs());
       return _i7.MaterialPageX<dynamic>(
-          routeData: routeData, child: _i5.WalletPage(key: args.key));
+          routeData: routeData, child: const _i5.WalletPage());
     },
     AuthControllerRoute.name: (routeData) {
       return _i7.MaterialPageX<dynamic>(
@@ -99,23 +97,10 @@ class RegisterRoute extends _i7.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i5.WalletPage]
-class WalletRoute extends _i7.PageRouteInfo<WalletRouteArgs> {
-  WalletRoute({_i8.Key? key})
-      : super(WalletRoute.name,
-            path: '/wallet-page', args: WalletRouteArgs(key: key));
+class WalletRoute extends _i7.PageRouteInfo<void> {
+  const WalletRoute() : super(WalletRoute.name, path: '/wallet-page');
 
   static const String name = 'WalletRoute';
-}
-
-class WalletRouteArgs {
-  const WalletRouteArgs({this.key});
-
-  final _i8.Key? key;
-
-  @override
-  String toString() {
-    return 'WalletRouteArgs{key: $key}';
-  }
 }
 
 /// generated route for

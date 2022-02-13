@@ -3,6 +3,7 @@ import 'package:hackathon_app/core/extensions/context_extension.dart';
 import 'package:hackathon_app/view/home/convert_page/viewmodel/convert_page_viewmodel.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../core/components/button/custom_animation_button.dart';
 import '../../../../core/components/button/custom_rounded_button.dart';
 import '../../../../core/components/center/center_circular_indicator.dart';
 import '../../../../core/components/center/center_error.dart';
@@ -60,7 +61,7 @@ class ConvertPage extends StatelessWidget {
               ),
             ),
           ),
-          CustomRoundedButton(
+          CustomAnimationRoundedButton(
             title: 'Convert',
             onTap: () async {
               final _userDBService = UserService();
