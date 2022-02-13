@@ -23,10 +23,6 @@ class RegisterBody extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Divider(
-                height: context.height * 0.1,
-                color: Colors.transparent,
-              ),
               InputField(
                   icon: const Icon(Icons.person),
                   title: "Ad",
@@ -53,6 +49,15 @@ class RegisterBody extends StatelessWidget {
                   validator: _registerpageCubit.confirmPasswordValidator,
                   controller: _registerpageCubit.confirmPassowrdController),
               const _SubmitButton(),
+              Padding(
+                padding: context.paddingMedium,
+                child: Column(
+                  children: [
+                    const Text.rich(TextSpan(text: "Zaten hesabım var")),
+                    _SignInButton(),
+                  ],
+                ),
+              )
             ],
           ),
         ),
@@ -61,7 +66,18 @@ class RegisterBody extends StatelessWidget {
   }
 }
 
-class WC {}
+class _SignInButton extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return TextButton(
+        onPressed: () => Navigator.pop(context),
+        child: Text(
+          "Giriş Yap",
+          style: context.textTheme.bodyLarge!
+              .copyWith(color: context.themeColor.primary),
+        ));
+  }
+}
 
 class _SubmitButton extends StatelessWidget {
   const _SubmitButton({Key? key}) : super(key: key);
