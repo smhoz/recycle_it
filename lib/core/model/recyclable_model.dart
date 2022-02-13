@@ -2,6 +2,10 @@ import 'dart:convert';
 
 enum RecyclableType { paper, plastic, glass, clothes, oil, battery }
 
+extension RecyclableName on RecyclableType {
+  String get getName => name;
+}
+
 class Recyclable {
   RecyclableType? type;
   double? currentLoad;
