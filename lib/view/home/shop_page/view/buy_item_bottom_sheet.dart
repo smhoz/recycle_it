@@ -69,7 +69,7 @@ class BuyItemBottomSheet extends StatelessWidget {
 
   Text _supportedConversionsText(BuildContext context) {
     return Text(
-      "Açıklama:",
+      "Description:",
       style: context.textTheme.bodyLarge,
       textAlign: TextAlign.start,
     );
@@ -77,7 +77,7 @@ class BuyItemBottomSheet extends StatelessWidget {
 
   Widget _buyButton(BuildContext context) {
     return CustomRoundedButton(
-      title: "SATIN AL",
+      title: "BUY",
       onTap: () {
         balanceUpdate().then((value) {
           if (value) {
@@ -94,15 +94,14 @@ class BuyItemBottomSheet extends StatelessWidget {
   ListTile _itemName(BuildContext context) {
     return ListTile(
       leading: CircleAvatar(
-        backgroundColor: context.themeColor.primary,
-        child: Image.network(
+        backgroundColor: Colors.transparent,
+        backgroundImage: NetworkImage(
           item!.imageURL!,
-          fit: BoxFit.cover,
         ),
       ),
       title: Text(
         item!.title!,
-        style: context.textTheme.headline1,
+        style: context.textTheme.bodyLarge?.copyWith(color: context.themeColor.onSecondary),
       ),
     );
   }

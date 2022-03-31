@@ -8,6 +8,7 @@ import '../../../../core/components/text/title_text_with_container.dart';
 import '../../../../core/extensions/context_extension.dart';
 import '../../../../core/init/theme/color/custom_colors.dart';
 import '../../_product/widgets/home/title_with_child.dart';
+import '../../home_page/viewmodel/home_view_model.dart';
 import '../model/shop_item.dart';
 import '../viewmodel/shop_view_model.dart';
 import 'buy_item_bottom_sheet.dart';
@@ -110,9 +111,7 @@ class ShopPage extends StatelessWidget {
         boxShadow: [CustomColors.instance.containerBoxShadow]);
   }
 
-  ListView _shopLists(
-    ShopViewModel viewModel,
-  ) {
+  ListView _shopLists(ShopViewModel viewModel) {
     List<Item> items = (viewModel.itemCategories[viewModel.currentIndex].entities as List<Item>);
 
     return ListView.builder(
@@ -131,56 +130,60 @@ class ItemCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      shape: RoundedRectangleBorder(borderRadius: CustomBorderRadius.normalCircular()),
-      margin: context.paddingMedium,
-      child: GestureDetector(
-        onTap: () => context.showBottomSheet(child: BuyItemBottomSheet(item: item)),
-        child: Stack(
-          alignment: Alignment.topRight,
-          children: [
-            _priceRow(context),
-            _shopContainer(context),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Container _shopContainer(BuildContext context) {
-    return Container(
-      alignment: Alignment.bottomLeft,
-      margin: context.paddingLow,
-      decoration: _boxDecoration(),
-      width: context.dynamicWidth(0.7),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Padding(
+    return SizedBox(
+      height: context.dynamicHeight(0.7),
+      width: context.dynamicWidth(0.8),
+      child: Card(
+        shape: RoundedRectangleBorder(borderRadius: CustomBorderRadius.normalCircular()),
+        margin: context.paddingMedium,
+        child: GestureDetector(
+          onTap: () {
+            context.showBottomSheet(
+                child: BuyItemBottomSheet(item: item),
+                onClosed: () {
+                  context.read<HomeViewModel>().changeIsShowModalBottomSheet(false);
+                });
+            context.read<HomeViewModel>().changeIsShowModalBottomSheet(true);
+          },
+          child: Padding(
             padding: context.paddingLow,
-            child: _title(context),
+            child: Column(
+              children: [
+                _priceRow(context),
+                Expanded(
+                  child: Padding(
+                    padding: context.paddingMedium,
+                    child: Image.network(
+                      item!.imageURL.toString(),
+                    ),
+                  ),
+                ),
+                _shopContainer(context),
+              ],
+            ),
           ),
-          _forwardIcon()
-        ],
-      ),
-    );
-  }
-
-  BoxDecoration _boxDecoration() {
-    return BoxDecoration(
-      borderRadius: CustomBorderRadius.normalCircular(),
-      image: DecorationImage(
-        image: NetworkImage(
-          item!.imageURL.toString(),
         ),
       ),
     );
   }
 
-  Icon _forwardIcon() {
-    return const Icon(
+  Widget _shopContainer(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Padding(
+          padding: context.paddingLow,
+          child: _title(context),
+        ),
+        _forwardIcon(context)
+      ],
+    );
+  }
+
+  Icon _forwardIcon(BuildContext context) {
+    return Icon(
       Icons.arrow_forward_ios,
-      color: Colors.black,
+      color: context.themeColor.onSecondary,
     );
   }
 
@@ -204,7 +207,7 @@ class ItemCard extends StatelessWidget {
         SizedBox(
           width: context.width * 0.02,
         ),
-        Text("₺${item?.price?.toString()}")
+        Text("\$${item?.price?.toString()}")
       ]),
     );
   }

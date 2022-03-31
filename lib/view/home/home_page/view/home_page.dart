@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:provider/provider.dart';
@@ -14,13 +15,9 @@ class HomePage extends StatelessWidget {
     return Consumer<HomeViewModel>(builder: (context, viewModel, child) {
       return Scaffold(
         body: IndexedStack(children: BottomBarItems.instance.pages, index: viewModel.currentIndex),
-        bottomNavigationBar: AnimatedOpacity(
-          duration: context.normalDuration,
-          opacity: viewModel.isShowModalBottomSheet ? 0 : 1,
-          child: Padding(
-            padding: context.paddingMedium,
-            child: _bottomNavigationBar(viewModel, context),
-          ),
+        bottomNavigationBar: Padding(
+          padding: context.paddingMedium,
+          child: _bottomNavigationBar(viewModel, context),
         ),
       );
     });
@@ -31,6 +28,7 @@ class HomePage extends StatelessWidget {
       selectedIndex: viewModel.currentIndex,
       tabs: BottomBarItems.instance.items,
       onTabChange: (index) {
+        viewModel.isShowModalBottomSheet ? context.router.pop() : null;
         viewModel.changeCurrentIndex(index);
       },
       rippleColor: CustomColors.instance.bottomBarrippleColor,
