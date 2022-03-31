@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hackathon_app/core/init/theme/color/custom_colors.dart';
 import 'package:hackathon_app/view/home/_product/widgets/home/title_with_child.dart';
 import 'package:lottie/lottie.dart';
 
@@ -39,7 +40,12 @@ class LoginBody extends StatelessWidget {
       key: _loginpageCubit.formKey,
       child: Column(
         children: [
-          Flexible(flex: 8, child: Lottie.asset(AssetConstant.recycleAnimation, width: 200, height: 200)),
+          const Spacer(
+            flex: 1,
+          ),
+          Flexible(
+              flex: 8,
+              child: Material(elevation: 4, color: Colors.transparent, type: MaterialType.circle, child: Image.asset(AssetConstant.logoPng))),
           const Spacer(flex: 3),
           _body(_loginpageCubit),
           const Spacer(flex: 3),
