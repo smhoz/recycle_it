@@ -56,7 +56,7 @@ class ContainerBottomSheet extends StatelessWidget {
       ),
       title: Text(
         container!.name!,
-        style: context.textTheme.headline1,
+        style: context.textTheme.bodyLarge,
       ),
     );
   }
