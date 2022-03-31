@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hackathon_app/core/consts/app/assets_constant.dart';
 import '../../../../core/model/user_model.dart';
 import '../../_product/widgets/home/title_with_child.dart';
 import '../../../../core/consts/navigation_const.dart';
@@ -46,7 +47,7 @@ class ProfileBody extends StatelessWidget {
 
   Widget _settingsButton(BuildContext context) {
     return IconButton(
-      icon: const Icon(Icons.settings),
+      icon: const Icon(Icons.logout),
       onPressed: () => getIt<AuthRepository>().signOut().then((value) => context.router.replaceAll([const AuthControllerRoute()])),
     );
   }
@@ -60,7 +61,7 @@ class ProfileBody extends StatelessWidget {
             height: context.dynamicHeight(0.25),
             width: context.dynamicWidth(0.9),
             child: Material(
-              borderRadius: const CustomBorderRadius.onlyTopLeftAndRightNormalCircular(),
+              borderRadius: CustomBorderRadius.normalCircular(),
               elevation: 8,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -83,11 +84,12 @@ class ProfileBody extends StatelessWidget {
     return Align(
       alignment: Alignment.topCenter,
       child: Material(
-        elevation: 8,
+        elevation: 4,
         color: CustomColors.instance.coinColor,
-        child: CircleAvatar(
+        child: const CircleAvatar(
           radius: 44,
-          backgroundColor: context.themeColor.primary,
+          backgroundColor: Colors.transparent,
+          backgroundImage: AssetImage(AssetConstant.logoPng),
         ),
         type: MaterialType.circle,
       ),
@@ -128,6 +130,7 @@ class _WalletContainer extends StatelessWidget {
 
   BoxDecoration _boxDecoration(BuildContext context) {
     return BoxDecoration(
+      borderRadius: const CustomBorderRadius.onlyBottomLeftAndRightNormalCircular(),
       color: context.themeColor.primary,
     );
   }
