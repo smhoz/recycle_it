@@ -86,20 +86,24 @@ class ContainerBottomSheet extends StatelessWidget {
             onTap: () {
               viewModel.changeTapIndex(recyclableIndex);
             },
-            child: Column(
-              children: [
-                RecyclableProgressBar(
-                  recyclable: container!.recyclables![recyclableIndex],
-                ),
-                AnimatedContainer(
-                  duration: context.normalDuration,
-                  height: viewModel.tapIndex == recyclableIndex ? 15 : 0,
-                  child: Text(
-                    "${container!.recyclables![recyclableIndex].currentLoad} / ${container!.recyclables![recyclableIndex].maxLoad} KG",
-                    style: context.textTheme.bodyLarge?.copyWith(fontSize: 12),
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  RecyclableProgressBar(
+                    recyclable: container!.recyclables![recyclableIndex],
                   ),
-                )
-              ],
+                  AnimatedContainer(
+                    duration: context.normalDuration,
+                    height: viewModel.tapIndex == recyclableIndex ? 20 : 0,
+                    child: Expanded(
+                      child: Text(
+                        "${container!.recyclables![recyclableIndex].currentLoad} / ${container!.recyclables![recyclableIndex].maxLoad} KG",
+                        style: context.textTheme.bodyLarge?.copyWith(fontSize: 12),
+                      ),
+                    ),
+                  )
+                ],
+              ),
             ),
           );
         },
