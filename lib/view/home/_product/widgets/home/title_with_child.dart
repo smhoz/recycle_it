@@ -19,7 +19,7 @@ class HeaderTitleWithChild extends StatelessWidget {
         children: [
           Align(
             alignment: Alignment.topLeft,
-            child: InkWell(onTap: () => context.router.pushWidget(const ConvertPage()), child: _textAndTrailingWidget(context)),
+            child: _textAndTrailingWidget(context),
           ),
           Align(
             alignment: Alignment.bottomCenter,
