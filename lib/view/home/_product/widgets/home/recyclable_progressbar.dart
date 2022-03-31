@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hackathon_app/core/extensions/context_extension.dart';
-import 'package:hackathon_app/core/model/recyclable_model.dart';
+import '../../../../../core/extensions/context_extension.dart';
+import '../../../../../core/model/recyclable_model.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
 class RecyclableProgressBar extends StatelessWidget {

@@ -19,11 +19,11 @@ class BottomBarItems {
   final List<GButton> items = const <GButton>[
     GButton(
       icon: Icons.home_filled,
-      text: 'Ana Sayfa',
+      text: 'Home',
     ),
     GButton(
       icon: Icons.shopping_bag_outlined,
-      text: 'Mağaza',
+      text: 'Store',
     ),
     GButton(
       icon: Icons.person_outline_outlined,

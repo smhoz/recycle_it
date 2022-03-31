@@ -7,17 +7,17 @@ extension RecyclableName on RecyclableType {
   String getTranslation() {
     switch (this) {
       case RecyclableType.battery:
-        return "Atık Pil";
+        return "Battery";
       case RecyclableType.plastic:
-        return "Plastik";
+        return "Plastic";
       case RecyclableType.glass:
-        return "Cam";
+        return "Glass";
       case RecyclableType.clothes:
         return "Kıyafet";
       case RecyclableType.oil:
-        return "Atık Yağ";
+        return "Oil";
       case RecyclableType.paper:
-        return "Kağıt";
+        return "Paper";
       default:
         return "Yok";
     }
@@ -53,8 +53,7 @@ class Recyclable {
 
   String toJson() => json.encode(toMap());
 
-  factory Recyclable.fromJson(String source) =>
-      Recyclable.fromMap(json.decode(source));
+  factory Recyclable.fromJson(String source) => Recyclable.fromMap(json.decode(source));
 
   static RecyclableType fromString(String value) {
     for (var type in RecyclableType.values) {

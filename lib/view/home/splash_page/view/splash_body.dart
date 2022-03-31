@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../core/components/center/center_circular_indicator.dart';
 import '../../../../core/consts/navigation_const.dart';
 import '../../../../core/view_model/bloc/auth_bloc.dart';
 import '../../../authenticate/login_page/view/login_page.dart';
@@ -16,7 +17,7 @@ class SplashBody extends StatelessWidget {
       buildWhen: (previous, current) => current != previous,
       builder: (context, state) {
         if (state is SplashInitial) {
-          return const Center(child: CircularProgressIndicator());
+          return const CenterCircularProgress();
         } else {
           return const AuthController();
         }
@@ -38,7 +39,7 @@ class AuthController extends StatelessWidget {
             if (state is AuthUnauthenticated) {
               return const LoginPage();
             } else {
-              return const Center(child: CircularProgressIndicator());
+              return const CenterCircularProgress();
             }
           },
           listener: (context, state) {

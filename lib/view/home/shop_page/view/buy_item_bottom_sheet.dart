@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:hackathon_app/core/commons/_print_message.dart';
-import 'package:hackathon_app/core/components/bottom_sheet/custom_bottom_sheet.dart';
-import 'package:hackathon_app/core/components/button/custom_rounded_button.dart';
-import 'package:hackathon_app/core/extensions/context_extension.dart';
-import 'package:hackathon_app/core/network/user_service.dart';
-import 'package:hackathon_app/core/repository/global_repositor.dart';
-import 'package:hackathon_app/core/utils/locator_get_it.dart';
-import 'package:hackathon_app/view/home/profile_page/viewmodel/bloc/profile_bloc.dart';
-import 'package:hackathon_app/view/home/shop_page/model/shop_item.dart';
+import '../../../../core/commons/_print_message.dart';
+import '../../../../core/components/bottom_sheet/custom_bottom_sheet.dart';
+import '../../../../core/components/button/custom_rounded_button.dart';
+import '../../../../core/extensions/context_extension.dart';
+import '../../../../core/network/user_service.dart';
+import '../../../../core/repository/global_repositor.dart';
+import '../../../../core/utils/locator_get_it.dart';
+import '../../profile_page/viewmodel/bloc/profile_bloc.dart';
+import '../model/shop_item.dart';
 
 class BuyItemBottomSheet extends StatelessWidget {
   final Item? item;
@@ -31,7 +31,7 @@ class BuyItemBottomSheet extends StatelessWidget {
             Padding(
               padding: context.paddingLow,
               child: SizedBox(
-                height: context.height * 0.14,
+                height: context.dynamicHeight(0.14),
                 child: _itemDescription(context),
               ),
             ),
@@ -81,13 +81,9 @@ class BuyItemBottomSheet extends StatelessWidget {
       onTap: () {
         balanceUpdate().then((value) {
           if (value) {
-            PrintMessage.showSucces(context,
-                message:
-                    "Satın alım başarılı! Ürün kodunuz e-postanıza gönderilmiştir.");
+            PrintMessage.showSucces(context, message: "Satın alım başarılı! Ürün kodunuz e-postanıza gönderilmiştir.");
           } else {
-            PrintMessage.showFailed(context,
-                message:
-                    "Satın alım başarısız! Cüzdanınızda yeterli bakiye olduğundan emin olun.");
+            PrintMessage.showFailed(context, message: "Satın alım başarısız! Cüzdanınızda yeterli bakiye olduğundan emin olun.");
           }
           Navigator.pop(context);
         });

@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:hackathon_app/core/model/recyclable_model.dart';
+import 'recyclable_model.dart';
 
 class Conversion {
   final String? containerID;

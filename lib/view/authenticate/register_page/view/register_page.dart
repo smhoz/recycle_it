@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hackathon_app/core/components/appbar/transparent_app_bar.dart';
+import '../../../../core/components/appbar/transparent_app_bar.dart';
 
 import '../viewmodel/cubit/register_cubit.dart';
 import 'register_body.dart';
@@ -11,6 +11,7 @@ class RegisterPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: const TransparentAppBar(),
       body: BlocProvider(
         create: (context) => RegisterCubit(),

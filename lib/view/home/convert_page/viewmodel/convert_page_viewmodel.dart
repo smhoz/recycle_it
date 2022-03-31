@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
-import 'package:hackathon_app/core/init/mixin/message_mixin.dart';
-import 'package:hackathon_app/core/model/conversion_model.dart';
-import 'package:hackathon_app/view/home/convert_page/service/convert_page_service.dart';
+
+import '../../../../core/init/mixin/message_mixin.dart';
+import '../../../../core/model/conversion_model.dart';
+import '../service/convert_page_service.dart';
 
 enum ConvertState { idle, complete, loading }
 
@@ -21,7 +22,6 @@ class ConvertPageViewModel extends ChangeNotifier with MessageNotifierMixin {
   void getItems() async {
     changeConvertState(ConvertState.loading);
     final response = await ConvertPageService.instance.getItems();
-    print(response);
     if (response is Conversion) {
       conversions = response;
       changeConvertState(ConvertState.complete);

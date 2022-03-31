@@ -12,6 +12,7 @@ class CustomColors {
     offset: const Offset(0, 2.0), // shadow direction: bottom right
   );
   Color coinColor = Colors.yellow;
+  Color statusBarColor = const Color(0xFF76acb8);
   Color bottomBarrippleColor = Colors.grey[300]!;
   Color bottomBarhoverColor = Colors.grey[100]!;
   Color tabBackgroundColor = Colors.grey[100]!;

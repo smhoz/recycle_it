@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import '../../../../../core/repository/auth_repository.dart';
 
+import '../../../../../core/repository/auth_repository.dart';
 import '../../../../../core/utils/locator_get_it.dart';
 
 part 'register_state.dart';

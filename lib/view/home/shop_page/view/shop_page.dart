@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:hackathon_app/view/home/shop_page/view/buy_item_bottom_sheet.dart';
-import '../../../../core/components/center/center_circular_indicator.dart';
-import '../../../../core/components/center/center_error.dart';
-import '../../../../core/extensions/context_extension.dart';
-import '../../../../core/init/theme/color/custom_colors.dart';
-import '../../../../core/utils/border/custom_border_radius.dart';
-
 import 'package:provider/provider.dart';
 
+import '../../../../core/components/border/custom_border_radius.dart';
+import '../../../../core/components/center/center_circular_indicator.dart';
+import '../../../../core/components/center/center_error.dart';
 import '../../../../core/components/text/title_text_with_container.dart';
+import '../../../../core/extensions/context_extension.dart';
+import '../../../../core/init/theme/color/custom_colors.dart';
+import '../../_product/widgets/home/title_with_child.dart';
 import '../model/shop_item.dart';
 import '../viewmodel/shop_view_model.dart';
+import 'buy_item_bottom_sheet.dart';
 
 class ShopPage extends StatelessWidget {
   const ShopPage({Key? key}) : super(key: key);
@@ -18,58 +18,57 @@ class ShopPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-            Consumer<ShopViewModel>(
-              builder: (context, viewModel, child) {
-                switch (viewModel.shopState) {
-                  case ShopState.loading:
-                    return const CenterCircularProgress();
-                  case ShopState.complete:
-                    return Padding(
-                      padding: context.paddingLow,
-                      child: _body(context, viewModel),
-                    );
-                  default:
-                    return CenterError(
-                      error: viewModel.error,
-                    );
-                }
-              },
-            )
-          ],
-        ),
+      child: Consumer<ShopViewModel>(
+        builder: (context, viewModel, child) {
+          switch (viewModel.shopState) {
+            case ShopState.loading:
+              return const CenterCircularProgress();
+            case ShopState.complete:
+              return _body(context, viewModel);
+            default:
+              return CenterError(
+                error: viewModel.error,
+              );
+          }
+        },
       ),
     );
   }
 
   Widget _body(BuildContext context, ShopViewModel viewModel) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: context.homesymetricPadding,
-          child: Text(
-            "Mağaza",
-            style: context.textTheme.bodyText1!
-                .copyWith(fontSize: 28, fontWeight: FontWeight.w500),
+    return HeaderTitleWithChild(
+      title: "Store",
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(
+            height: context.dynamicHeight(0.1),
+            child: _categoriesList(context, viewModel),
           ),
-        ),
-        SizedBox(
-          height: context.height * 0.1,
-          child: _categoriesList(context, viewModel),
-        ),
-        SizedBox(
-          height: context.height * 0.5,
-          child: _shopLists(viewModel),
-        ),
-        TitleTextWithContainer(
-          text: "Popüler",
-          child: SizedBox(
-              height: context.height * 0.18, child: _shopLists(viewModel)),
-        )
-      ],
+          SizedBox(
+            height: context.dynamicHeight(0.58),
+            child: SingleChildScrollView(
+              child: Column(
+                children: [_shopListContainer(context, viewModel), _popularListContainer(context, viewModel)],
+              ),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+  TitleTextWithContainer _popularListContainer(BuildContext context, ShopViewModel viewModel) {
+    return TitleTextWithContainer(
+      text: "Popular",
+      child: SizedBox(height: context.dynamicHeight(0.18), child: _shopLists(viewModel)),
+    );
+  }
+
+  SizedBox _shopListContainer(BuildContext context, ShopViewModel viewModel) {
+    return SizedBox(
+      height: context.dynamicHeight(0.5),
+      child: _shopLists(viewModel),
     );
   }
 
@@ -93,10 +92,7 @@ class ShopPage extends StatelessWidget {
               decoration: _boxDecoration(viewModel, index, context),
               child: Text(
                 viewModel.itemCategories[index].categoryName!,
-                style: context.textTheme.headline6!.copyWith(
-                    color: viewModel.currentIndex == index
-                        ? null
-                        : context.themeColor.primary),
+                style: context.textTheme.headline6?.copyWith(color: viewModel.currentIndex == index ? null : context.themeColor.primary),
               ),
             ),
           ),
@@ -105,17 +101,11 @@ class ShopPage extends StatelessWidget {
     );
   }
 
-  BoxDecoration _boxDecoration(
-      ShopViewModel viewModel, int index, BuildContext context) {
+  BoxDecoration _boxDecoration(ShopViewModel viewModel, int index, BuildContext context) {
     bool isEqualCurrentIndex = viewModel.currentIndex == index ? true : false;
     return BoxDecoration(
-        border: Border.all(
-            color: isEqualCurrentIndex
-                ? context.themeColor.primary
-                : context.themeColor.onPrimary),
-        color: isEqualCurrentIndex
-            ? context.themeColor.primary
-            : context.themeColor.onPrimary,
+        border: Border.all(color: isEqualCurrentIndex ? context.themeColor.primary : context.themeColor.onPrimary),
+        color: isEqualCurrentIndex ? context.themeColor.primary : context.themeColor.onPrimary,
         borderRadius: CustomBorderRadius.highCircular(),
         boxShadow: [CustomColors.instance.containerBoxShadow]);
   }
@@ -123,8 +113,7 @@ class ShopPage extends StatelessWidget {
   ListView _shopLists(
     ShopViewModel viewModel,
   ) {
-    List<Item> items = (viewModel
-        .itemCategories[viewModel.currentIndex].entities as List<Item>);
+    List<Item> items = (viewModel.itemCategories[viewModel.currentIndex].entities as List<Item>);
 
     return ListView.builder(
       scrollDirection: Axis.horizontal,
@@ -143,51 +132,63 @@ class ItemCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-        
-      shape: RoundedRectangleBorder(
-          borderRadius: CustomBorderRadius.normalCircular()),
+      shape: RoundedRectangleBorder(borderRadius: CustomBorderRadius.normalCircular()),
       margin: context.paddingMedium,
       child: GestureDetector(
-        onTap: () =>
-            context.showBottomSheet(child: BuyItemBottomSheet(item: item)),
+        onTap: () => context.showBottomSheet(child: BuyItemBottomSheet(item: item)),
         child: Stack(
           alignment: Alignment.topRight,
           children: [
             _priceRow(context),
-            Container(
-              alignment: Alignment.bottomLeft,
-              margin: context.paddingLow,
-              decoration: BoxDecoration(
-                borderRadius: CustomBorderRadius.normalCircular(),
-                image: DecorationImage(
-                  image: NetworkImage(
-                    item!.imageURL.toString(),
-                  ),
-                ),
-              ),
-              width: context.width * 0.7,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Padding(
-                    padding: context.paddingLow,
-                    child: Text(
-                      item!.title.toString(),
-                      style:
-                          context.textTheme.bodyText1!.copyWith(fontSize: 15),
-                      maxLines: 2,
-                    ),
-                  ),
-                  const Icon(
-                    Icons.arrow_forward_ios,
-                    color: Colors.black,
-                  )
-                ],
-              ),
-            ),
+            _shopContainer(context),
           ],
         ),
       ),
+    );
+  }
+
+  Container _shopContainer(BuildContext context) {
+    return Container(
+      alignment: Alignment.bottomLeft,
+      margin: context.paddingLow,
+      decoration: _boxDecoration(),
+      width: context.dynamicWidth(0.7),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Padding(
+            padding: context.paddingLow,
+            child: _title(context),
+          ),
+          _forwardIcon()
+        ],
+      ),
+    );
+  }
+
+  BoxDecoration _boxDecoration() {
+    return BoxDecoration(
+      borderRadius: CustomBorderRadius.normalCircular(),
+      image: DecorationImage(
+        image: NetworkImage(
+          item!.imageURL.toString(),
+        ),
+      ),
+    );
+  }
+
+  Icon _forwardIcon() {
+    return const Icon(
+      Icons.arrow_forward_ios,
+      color: Colors.black,
+    );
+  }
+
+  Text _title(BuildContext context) {
+    return Text(
+      item!.title.toString(),
+      style: context.textTheme.bodyText1?.copyWith(fontSize: 15),
+      maxLines: 2,
     );
   }
 
@@ -203,7 +204,7 @@ class ItemCard extends StatelessWidget {
         SizedBox(
           width: context.width * 0.02,
         ),
-        Text("₺${item!.price!.toString()}")
+        Text("₺${item?.price?.toString()}")
       ]),
     );
   }

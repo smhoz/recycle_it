@@ -19,7 +19,7 @@ class InputField extends StatelessWidget {
   final Widget? suffix;
   final TextAlign? textAlign;
   final TextStyle? textStyle;
-  InputField({
+  const InputField({
     Key? key,
     this.title,
     this.icon,
@@ -38,8 +38,6 @@ class InputField extends StatelessWidget {
     this.onChanged,
     this.readOnly,
   }) : super(key: key);
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -65,8 +63,7 @@ class InputField extends StatelessWidget {
     );
   }
 
-  TextFormField _textFormField(
-      BuildContext context, OutlineInputBorder border) {
+  TextFormField _textFormField(BuildContext context, OutlineInputBorder border) {
     return TextFormField(
       style: textStyle,
       textAlign: textAlign ?? TextAlign.start,
@@ -82,8 +79,7 @@ class InputField extends StatelessWidget {
     );
   }
 
-  InputDecoration _inputDecoration(
-      BuildContext context, OutlineInputBorder border) {
+  InputDecoration _inputDecoration(BuildContext context, OutlineInputBorder border) {
     return InputDecoration(
       labelText: title,
       prefixIcon: icon,
@@ -94,8 +90,7 @@ class InputField extends StatelessWidget {
       fillColor: context.theme.cardColor,
       prefixIconConstraints: const BoxConstraints(minWidth: 72),
       border: border,
-      enabledBorder: border.copyWith(
-          borderSide: BorderSide(color: context.theme.cardColor)),
+      enabledBorder: border.copyWith(borderSide: BorderSide(color: context.theme.cardColor)),
       focusedBorder: border.copyWith(
         borderSide: BorderSide(
           color: context.themeColor.secondary,
