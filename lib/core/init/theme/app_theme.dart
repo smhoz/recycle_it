@@ -19,6 +19,7 @@ class AppTheme {
         colorScheme: ColorScheme.light(
           primary: const Color(0xFF76acb8),
           onPrimary: Colors.grey[100]!,
+          onSecondary: Colors.black,
           secondary: Colors.green,
           onError: Colors.red,
           secondaryContainer: Colors.grey.shade100,

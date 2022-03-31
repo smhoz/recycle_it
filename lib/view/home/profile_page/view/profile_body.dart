@@ -24,7 +24,7 @@ class ProfileBody extends StatelessWidget {
     return SafeArea(
       child: HeaderTitleWithChild(
         trailing: _settingsButton(context),
-        title: "Profil",
+        title: "Profile",
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [

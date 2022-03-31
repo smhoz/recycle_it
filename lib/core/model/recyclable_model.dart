@@ -51,8 +51,6 @@ class Recyclable {
     );
   }
 
-  String toJson() => json.encode(toMap());
-
   factory Recyclable.fromJson(String source) => Recyclable.fromMap(json.decode(source));
 
   static RecyclableType fromString(String value) {

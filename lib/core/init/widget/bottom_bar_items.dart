@@ -27,7 +27,7 @@ class BottomBarItems {
     ),
     GButton(
       icon: Icons.person_outline_outlined,
-      text: 'Profil',
+      text: 'Profile',
     ),
   ];
 }

@@ -58,6 +58,9 @@ dependencies:
 
   #Animations
   lottie: ^1.2.2
+
+  #Core Utility
+  url_launcher: ^6.0.20
   
   #Features
   qr_code_scanner: ^0.6.1

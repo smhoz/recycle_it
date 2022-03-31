@@ -60,7 +60,7 @@ class ConvertPage extends StatelessWidget {
 
   Text _recycleText(BuildContext context) {
     return Text(
-      "Thanks to this recycling, you have given 0.33 m2 of area to the forest!",
+      "By recycling your waste, you have saved 0.35 m² of land in the forest!",
       textAlign: TextAlign.center,
       style: context.textTheme.headline4,
     );

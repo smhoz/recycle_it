@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../../../../../core/components/bottom_sheet/custom_bottom_sheet.dart';
 import '../../../../../core/components/button/custom_rounded_button.dart';
 import '../../../../../core/components/sizedbox/page_sized_box.dart';
@@ -6,6 +7,7 @@ import '../../../../../core/extensions/context_extension.dart';
 import '../../../../../core/components/border/custom_border_radius.dart';
 
 import '../../../../../core/components/text/input_field.dart';
+import '../../../home_page/viewmodel/home_view_model.dart';
 
 class ProfileField extends StatelessWidget {
   final String? textTitle;
@@ -86,7 +88,8 @@ class ProfileField extends StatelessWidget {
   InkWell _editButton(BuildContext context) {
     return InkWell(
       onTap: () {
-        context.showBottomSheet(child: _bottomSheet());
+        context.read<HomeViewModel>().changeIsShowModalBottomSheet(true);
+        context.showBottomSheet(child: _bottomSheet(), onClosed: () => context.read<HomeViewModel>().changeIsShowModalBottomSheet(false));
       },
       child: Material(
         color: context.themeColor.secondaryContainer,
