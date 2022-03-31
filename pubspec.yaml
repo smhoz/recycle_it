@@ -56,6 +56,9 @@ dependencies:
   google_nav_bar: ^5.0.5
   percent_indicator: ^4.0.0
 
+  #Animations
+  lottie: ^1.2.2
+  
   #Features
   qr_code_scanner: ^0.6.1
 
@@ -88,6 +91,7 @@ flutter:
   assets:
  
     - .env
+    - assets/animations/
 
 
 

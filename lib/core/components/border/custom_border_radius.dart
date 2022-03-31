@@ -5,5 +5,7 @@ class CustomBorderRadius extends BorderRadius {
   CustomBorderRadius.lowCircular() : super.circular(8);
   CustomBorderRadius.normalCircular() : super.circular(16);
 
+  const CustomBorderRadius.onlyTopLeftAndRightNormalCircular() : super.only(topLeft: const Radius.circular(16), topRight: const Radius.circular(16));
+
   CustomBorderRadius.highCircular() : super.circular(100);
 }

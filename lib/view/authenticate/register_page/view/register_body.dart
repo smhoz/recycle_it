@@ -1,8 +1,10 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hackathon_app/core/extensions/context_extension.dart';
-import 'package:hackathon_app/core/navigation/navigation_manager.gr.dart';
+import 'package:hackathon_app/core/components/sizedbox/page_sized_box.dart';
+import 'package:hackathon_app/view/home/_product/widgets/home/title_with_child.dart';
+import '../../../../core/extensions/context_extension.dart';
+import '../../../../core/navigation/navigation_manager.gr.dart';
 import '../../../../core/components/button/custom_rounded_button.dart';
 import '../../../../core/components/text/input_field.dart';
 
@@ -16,52 +18,48 @@ class RegisterBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _registerpageCubit = context.read<RegisterCubit>();
-    return SingleChildScrollView(
-      child: Center(
-        child: Form(
-          key: _registerpageCubit.formKey,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              InputField(
-                  icon: const Icon(Icons.person),
-                  title: "Ad",
-                  controller: _registerpageCubit.nameController),
-              InputField(
-                  icon: const Icon(Icons.person),
-                  title: "Soyad",
-                  controller: _registerpageCubit.surnameController),
-              InputField(
-                  icon: const Icon(Icons.mail),
-                  title: "Email",
-                  validator: Validators.mailValidator,
-                  controller: _registerpageCubit.mailController),
-              InputField(
-                  icon: const Icon(Icons.password),
-                  title: "Şifre",
-                  validator: Validators.passwordValidator,
-                  isPassword: true,
-                  controller: _registerpageCubit.passwordController),
-              InputField(
-                  icon: const Icon(Icons.password),
-                  title: "Confirm Password",
-                  isPassword: true,
-                  validator: _registerpageCubit.confirmPasswordValidator,
-                  controller: _registerpageCubit.confirmPassowrdController),
-              const _SubmitButton(),
-              Padding(
-                padding: context.paddingMedium,
-                child: Column(
-                  children: [
-                    const Text.rich(TextSpan(text: "Zaten hesabım var")),
-                    _SignInButton(),
-                  ],
-                ),
-              )
-            ],
-          ),
+    return HeaderTitleWithChild(
+      title: "Sign Up",
+      child: Form(
+        key: _registerpageCubit.formKey,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [_inputFields(context, _registerpageCubit), _signInButton()],
         ),
       ),
+    );
+  }
+
+  Widget _inputFields(BuildContext context, RegisterCubit _registerpageCubit) {
+    return Column(
+      children: [
+        const PageSizedBox.normalHeightSizedBox(),
+        InputField(icon: const Icon(Icons.person), title: "Name", controller: _registerpageCubit.nameController),
+        InputField(icon: const Icon(Icons.person), title: "Surname", controller: _registerpageCubit.surnameController),
+        InputField(icon: const Icon(Icons.mail), title: "Email", validator: Validators.mailValidator, controller: _registerpageCubit.mailController),
+        InputField(
+            icon: const Icon(Icons.password),
+            title: "Password",
+            validator: Validators.passwordValidator,
+            isPassword: true,
+            controller: _registerpageCubit.passwordController),
+        InputField(
+            icon: const Icon(Icons.password),
+            title: "Confirm Password",
+            isPassword: true,
+            validator: _registerpageCubit.confirmPasswordValidator,
+            controller: _registerpageCubit.confirmPassowrdController),
+        const _SubmitButton(),
+      ],
+    );
+  }
+
+  Column _signInButton() {
+    return Column(
+      children: [
+        const Text.rich(TextSpan(text: "Already have an account?")),
+        _SignInButton(),
+      ],
     );
   }
 }
@@ -70,11 +68,10 @@ class _SignInButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextButton(
-        onPressed: () => Navigator.pop(context),
+        onPressed: () => context.router.pop(),
         child: Text(
-          "Giriş Yap",
-          style: context.textTheme.bodyLarge!
-              .copyWith(color: context.themeColor.primary),
+          "Sign In",
+          style: context.textTheme.bodyLarge?.copyWith(color: context.themeColor.primary),
         ));
   }
 }
@@ -86,8 +83,7 @@ class _SubmitButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final _registerpageCubit = context.read<RegisterCubit>();
     return BlocListener<RegisterCubit, RegisterState>(
-      listenWhen: (previous, current) =>
-          current is RegisterError || current is RegisterCompleted,
+      listenWhen: (previous, current) => current is RegisterError || current is RegisterCompleted,
       listener: (context, state) async {
         if (state is RegisterError) {
           PrintMessage.showFailed(context, message: state.errorMessage);
@@ -97,10 +93,7 @@ class _SubmitButton extends StatelessWidget {
         }
       },
       child: CustomRoundedButton(
-          onTap: () => _registerpageCubit.formKey.currentState!.validate()
-              ? _registerpageCubit.submit()
-              : null,
-          title: "Kayıt Ol"),
+          onTap: () => _registerpageCubit.formKey.currentState!.validate() ? _registerpageCubit.submit() : null, title: "Sign Up"),
     );
   }
 }

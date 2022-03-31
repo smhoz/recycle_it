@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:hackathon_app/core/components/bottom_sheet/custom_bottom_sheet.dart';
-import 'package:hackathon_app/core/extensions/context_extension.dart';
-import 'package:hackathon_app/core/model/container_model.dart';
-import 'package:hackathon_app/view/home/home_page/view/recyclable_progressbar.dart';
+import '../../../../core/components/bottom_sheet/custom_bottom_sheet.dart';
+import '../../../../core/extensions/context_extension.dart';
+import '../../../../core/model/container_model.dart';
+import '../../_product/widgets/home/recyclable_progressbar.dart';
 
 class ContainerBottomSheet extends StatelessWidget {
   final RecycleContainer? container;
@@ -37,6 +37,32 @@ class ContainerBottomSheet extends StatelessWidget {
     );
   }
 
+  ListTile _containerName(BuildContext context) {
+    return ListTile(
+      leading: CircleAvatar(
+        radius: 32,
+        backgroundColor: context.themeColor.primary,
+        child: Icon(
+          Icons.delete,
+          size: 32,
+          color: context.theme.cardColor,
+        ),
+      ),
+      title: Text(
+        container!.name!,
+        style: context.textTheme.headline1,
+      ),
+    );
+  }
+
+  Text _supportedConversionsText(BuildContext context) {
+    return Text(
+      "Available Recycles: ",
+      style: context.textTheme.bodyLarge,
+      textAlign: TextAlign.start,
+    );
+  }
+
   ListView _recyclablesListView() {
     return ListView(
       shrinkWrap: true,
@@ -54,14 +80,6 @@ class ContainerBottomSheet extends StatelessWidget {
     );
   }
 
-  Text _supportedConversionsText(BuildContext context) {
-    return Text(
-      "Desteklenen Dönüşümler:",
-      style: context.textTheme.bodyLarge,
-      textAlign: TextAlign.start,
-    );
-  }
-
   ListTile _addresListTile(BuildContext context) {
     return ListTile(
       leading: const Icon(Icons.location_pin, size: 32),
@@ -72,24 +90,6 @@ class ContainerBottomSheet extends StatelessWidget {
       trailing: IconButton(
         icon: const Icon(Icons.directions),
         onPressed: () {},
-      ),
-    );
-  }
-
-  ListTile _containerName(BuildContext context) {
-    return ListTile(
-      leading: CircleAvatar(
-        radius: 32,
-        backgroundColor: context.themeColor.primary,
-        child: Icon(
-          Icons.delete,
-          size: 32,
-          color: context.theme.cardColor,
-        ),
-      ),
-      title: Text(
-        container!.name!,
-        style: context.textTheme.headline1,
       ),
     );
   }

@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
-import 'package:hackathon_app/core/init/mixin/message_mixin.dart';
-import 'package:hackathon_app/core/model/container_model.dart';
 
+import '../../../../core/init/mixin/message_mixin.dart';
+import '../../../../core/model/container_model.dart';
 import '../service/home_service.dart';
 
-enum HomeViewState { idle, complete, loading }
+enum HomeViewState { idle, complete, loading, error }
 
 class HomeViewModel extends ChangeNotifier with MessageNotifierMixin {
   HomeViewState _homeViewState = HomeViewState.idle;
@@ -32,6 +32,7 @@ class HomeViewModel extends ChangeNotifier with MessageNotifierMixin {
       recycleContainers.addAll(response);
       changeHomeState(HomeViewState.complete);
     } else {
+      changeHomeState(HomeViewState.error);
       notifyError(response);
     }
   }

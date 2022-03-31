@@ -1,13 +1,16 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../core/extensions/context_extension.dart';
-import '../../../../core/components/button/custom_rounded_button.dart';
-import '../../../../core/components/text/input_field.dart';
+import 'package:hackathon_app/view/home/_product/widgets/home/title_with_child.dart';
+import 'package:lottie/lottie.dart';
 
 import '../../../../core/commons/_print_message.dart';
 import '../../../../core/commons/_validators.dart';
+import '../../../../core/components/button/custom_rounded_button.dart';
+import '../../../../core/components/text/input_field.dart';
+import '../../../../core/consts/app/assets_constant.dart';
 import '../../../../core/consts/navigation_const.dart';
+import '../../../../core/extensions/context_extension.dart';
 import '../../../../core/view_model/bloc/auth_bloc.dart';
 import '../viewmodel/cubit/login_cubit.dart';
 
@@ -24,24 +27,24 @@ class LoginBody extends StatelessWidget {
           PrintMessage.showFailed(context, message: state.errorMessage);
         }
       },
-      child: form(_loginpageCubit),
+      child: HeaderTitleWithChild(
+        title: "Login",
+        child: _form(context, _loginpageCubit),
+      ),
     );
   }
 
-  Form form(LoginCubit _loginpageCubit) {
+  Widget _form(BuildContext context, LoginCubit _loginpageCubit) {
     return Form(
       key: _loginpageCubit.formKey,
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            _body(_loginpageCubit),
-            _SignInButton(
-              loginpageCubit: _loginpageCubit,
-            ),
-            _signUpButton()
-          ],
-        ),
+      child: Column(
+        children: [
+          Flexible(flex: 8, child: Lottie.asset(AssetConstant.recycleAnimation, width: 200, height: 200)),
+          const Spacer(flex: 3),
+          _body(_loginpageCubit),
+          const Spacer(flex: 3),
+          _signUpButton(),
+        ],
       ),
     );
   }
@@ -49,7 +52,7 @@ class LoginBody extends StatelessWidget {
   Column _signUpButton() {
     return Column(
       children: [
-        const Text.rich(TextSpan(text: "Bir hesabın yok mu ?")),
+        const Text.rich(TextSpan(text: "Don't have an account ? ")),
         _SignUpButton(),
       ],
     );
@@ -68,8 +71,11 @@ class LoginBody extends StatelessWidget {
           isPassword: true,
           validator: Validators.passwordValidator,
           icon: const Icon(Icons.password),
-          title: "Şifre",
+          title: "Password",
           controller: _loginpageCubit.passwordController,
+        ),
+        _SignInButton(
+          loginpageCubit: _loginpageCubit,
         ),
       ],
     );
@@ -92,21 +98,14 @@ class _SignInButton extends StatelessWidget {
           return const Center(child: CircularProgressIndicator());
         } else {
           return CustomRoundedButton(
-              onTap: state
-                      is LoginCompleted // Giriş başarılıysa buton pasife düşecek.
+              onTap: state is LoginCompleted // Giriş başarılıysa buton pasife düşecek.
                   ? null
-                  : () =>
-                      loginpageCubit.formKey.currentState!.validate() == true
-                          ? loginpageCubit
-                              .signIn()
-                              .then((value) => context
-                                  .read<AuthBloc>()
-                                  .add(AuthTryGetCurrentUser()))
-                              .then((value) {
-                              FocusManager.instance.primaryFocus?.unfocus();
-                            })
-                          : null,
-              title: "Giriş Yap");
+                  : () => loginpageCubit.formKey.currentState!.validate() == true
+                      ? loginpageCubit.signIn().then((value) => context.read<AuthBloc>().add(AuthTryGetCurrentUser())).then((value) {
+                          FocusManager.instance.primaryFocus?.unfocus();
+                        })
+                      : null,
+              title: "Sign in");
         }
       },
     );
@@ -117,12 +116,10 @@ class _SignUpButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextButton(
-        onPressed: () =>
-            context.router.navigateNamed(RouteConsts.REGISTER_PAGE),
+        onPressed: () => context.router.navigateNamed(RouteConsts.REGISTER_PAGE),
         child: Text(
-          "Kayıt Ol",
-          style: context.textTheme.bodyLarge!
-              .copyWith(color: context.themeColor.primary),
+          "Sign Up",
+          style: context.textTheme.bodyLarge?.copyWith(color: context.themeColor.primary),
         ));
   }
 }

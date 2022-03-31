@@ -1,10 +1,9 @@
 import '../consts/keys.dart';
 import '../model/user_model.dart';
 import '../network/user_service.dart';
-import 'global_repositor.dart';
-
 import '../utils/json_webtoken.dart';
 import '../utils/locator_get_it.dart';
+import 'global_repositor.dart';
 
 enum AuthStatus { unknown, authenticated, unauthenticated }
 

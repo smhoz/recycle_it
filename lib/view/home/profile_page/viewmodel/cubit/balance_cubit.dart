@@ -1,10 +1,10 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import '../../../../../core/repository/global_repositor.dart';
-import '../../../../../core/utils/locator_get_it.dart';
 
 import '../../../../../../../core/network/user_service.dart';
+import '../../../../../core/repository/global_repositor.dart';
+import '../../../../../core/utils/locator_get_it.dart';
 import '../bloc/profile_bloc.dart';
 
 part 'balance_state.dart';

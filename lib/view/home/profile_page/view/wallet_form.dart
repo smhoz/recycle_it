@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:hackathon_app/core/components/text/input_field.dart';
+import '../../../../core/components/text/input_field.dart';
 
 class WalletForm extends StatelessWidget {
   const WalletForm({Key? key}) : super(key: key);
@@ -9,22 +9,22 @@ class WalletForm extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
+      children: const [
         InputField(
-          title: "Ad Soyad",
+          title: "Name And Surname ",
         ),
         InputField(
-          title: "Kart Numarası",
+          title: "Card Number",
         ),
         InputField(
           textInputType: TextInputType.number,
-          title: "Son Kullanım Tarihi",
+          title: "Expiration Date",
         ),
         InputField(
           title: "CVV",
           textInputType: TextInputType.number,
         ),
-        const _RemeberMyCardSwitch(),
+        _RemeberMyCardSwitch(),
       ],
     );
   }
@@ -49,7 +49,7 @@ class _RemeberMyCardSwitchState extends State<_RemeberMyCardSwitch> {
         Row(
           children: const [
             VerticalDivider(),
-            Text("Kartımı hatırla"),
+            Text("Remember"),
           ],
         ),
         themeSwitch(),

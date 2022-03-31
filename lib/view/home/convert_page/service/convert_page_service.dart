@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:hackathon_app/core/model/conversion_model.dart';
+import '../../../../core/model/conversion_model.dart';
 
 class ConvertPageService {
   ConvertPageService._privateConstructor();

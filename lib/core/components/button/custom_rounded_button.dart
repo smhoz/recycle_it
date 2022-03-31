@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../extensions/context_extension.dart';
 
 class CustomRoundedButton extends StatelessWidget {
@@ -38,10 +39,7 @@ class CustomRoundedButton extends StatelessWidget {
                 icon ?? const SizedBox.shrink(),
                 Text(
                   title!,
-                  style: context.textTheme.bodyMedium!.copyWith(
-                      letterSpacing: 2,
-                      color: context.theme.cardColor,
-                      fontSize: 24),
+                  style: context.textTheme.bodyMedium!.copyWith(letterSpacing: 2, color: context.theme.cardColor, fontSize: 24),
                 ),
               ],
             ),

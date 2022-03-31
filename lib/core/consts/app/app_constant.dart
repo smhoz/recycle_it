@@ -1,3 +1,3 @@
 class AppConstant {
-  static final FONT_FAMILY = "MontSerrat";
+  static const FONT_FAMILY = "MontSerrat";
 }

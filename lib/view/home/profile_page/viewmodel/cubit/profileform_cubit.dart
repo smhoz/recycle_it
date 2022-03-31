@@ -13,21 +13,17 @@ part 'profileform_state.dart';
 class ProfileformCubit extends Cubit<ProfileformState> {
   ProfileformCubit() : super(ProfileformInitial());
   final User _user = getIt<GlobalRepository>().user!;
+  User get user => _user;
   final _authRepo = getIt<AuthRepository>();
 
-  late TextEditingController nameController =
-      TextEditingController(text: _user.name);
-  late TextEditingController surnameController =
-      TextEditingController(text: _user.surname);
-  late TextEditingController mailController =
-      TextEditingController(text: _user.mail);
+  late TextEditingController nameController = TextEditingController(text: _user.name);
+  late TextEditingController surnameController = TextEditingController(text: _user.surname);
+  late TextEditingController mailController = TextEditingController(text: _user.mail);
   final formKey = GlobalKey<FormState>();
 
   bool get _checkField {
     // Eğer hiç bir alanı değiştirmemişse false dönecek
-    if (nameController.text.trim() == _user.name &&
-        surnameController.text.trim() == _user.surname &&
-        mailController.text.trim() == _user.mail) {
+    if (nameController.text.trim() == _user.name && surnameController.text.trim() == _user.surname && mailController.text.trim() == _user.mail) {
       return false;
     } else {
       return true;
@@ -46,10 +42,7 @@ class ProfileformCubit extends Cubit<ProfileformState> {
     if (formKey.currentState!.validate() && _checkField) {
       emit(ProfileformLoading());
       bool _result = await _authRepo.updateUserData(
-          uid: _user.uid ?? "",
-          mail: mailController.text.trim(),
-          name: nameController.text.trim(),
-          surname: surnameController.text.trim());
+          uid: _user.uid ?? "", mail: mailController.text.trim(), name: nameController.text.trim(), surname: surnameController.text.trim());
       if (_result) {
         _getUpdatedUser();
         emit(ProfileformCompleted());

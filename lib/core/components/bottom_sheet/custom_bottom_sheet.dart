@@ -1,5 +1,7 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 import '../../../view/home/home_page/viewmodel/home_view_model.dart';
 import '../../extensions/context_extension.dart';
 
@@ -51,8 +53,8 @@ class CustomBottomSheet extends StatelessWidget {
   InkWell _topBackButton(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.pop(context);
         context.read<HomeViewModel>().changeIsShowModalBottomSheet(false);
+        context.router.pop();
       },
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 12),

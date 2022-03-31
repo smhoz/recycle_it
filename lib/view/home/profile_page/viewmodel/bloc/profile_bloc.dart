@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import '../../../../../core/repository/global_repositor.dart';
 
 import '../../../../../../core/utils/locator_get_it.dart';
+import '../../../../../core/repository/global_repositor.dart';
 
 part 'profile_event.dart';
 part 'profile_state.dart';
