@@ -1,14 +1,17 @@
-# Benim Şehrim / Flutter Hackathon App
+# Recycle It / Google Solutions Challenge
 
-Çözüm getirdiğimiz problem: 
+Problem that we offer solution
 
-Sürdürülebilir Şehirler ve Topluluklar - 11.6
+Sustainable Cities and Communities - 11.6
 
-Kullandığımız Teknolojiler:
+Google Technologies we used for the project:
 
 ▪ Firebase Cloud Firestore
 ▪ Google Maps
 ▪ Firebase Realtime DB
-▪ Rest
+▪ Firebase Auth Rest API
 
-![hackathon_app](https://user-images.githubusercontent.com/78686891/153761945-7a2fc2ba-9ae8-4256-a13d-8f7c759f8d85.jpg)
+
+![recycle_it_mockup](https://user-images.githubusercontent.com/78686891/161143978-5a1c88c3-45d6-4ee4-8621-35cedfb0e585.png)
+
+
